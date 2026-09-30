@@ -22,6 +22,7 @@ export const ROUTES = {
   contact: '/contact',
   internVerification: '/verify',
   login: '/login',
+  adminLogin: '/orbit-admin-gate',
   register: '/register',
   forgotPassword: '/forgot-password',
   resetPassword: '/reset-password',

@@ -37,7 +37,10 @@ export function RoleRoute({ roles, children }: { roles: UserRole[]; children: Re
   const location = useLocation()
 
   if (isLoading) return <PageLoader />
-  if (!isAuthenticated) return <Navigate to={ROUTES.login} state={{ from: location }} replace />
+  if (!isAuthenticated) {
+    const isTargetingAdmin = roles.some((r) => ['admin', 'super_admin', 'editor', 'seo_manager'].includes(r))
+    return <Navigate to={isTargetingAdmin ? ROUTES.adminLogin : ROUTES.login} state={{ from: location }} replace />
+  }
   // Wrong role for this section — send them to their own dashboard instead
   // of a generic "not allowed" page, since they're a valid logged-in user,
   // just not one who belongs on this route.

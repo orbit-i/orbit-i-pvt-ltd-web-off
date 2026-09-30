@@ -47,7 +47,7 @@ export function LoginPage() {
   return (
     <>
       <SEO {...PAGE_SEO.login} />
-      <AuthShell title="Welcome back" subtitle="Log in to access your ORBIT-I dashboard.">
+      <AuthShell title="Client Portal Sign In" subtitle="Sign in to access your enterprise projects, milestones, invoices, and support.">
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
           <Input label="Email" type="email" placeholder="you@example.com" error={errors.email?.message} {...register('email')} />
           <div>

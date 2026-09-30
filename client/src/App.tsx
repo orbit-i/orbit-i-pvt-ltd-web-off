@@ -27,6 +27,7 @@ import { WebsiteDisclaimerPage } from '@/pages/public/WebsiteDisclaimerPage'
 import { NotFoundPage } from '@/pages/public/NotFoundPage'
 
 import { LoginPage } from '@/pages/public/auth/LoginPage'
+import { AdminLoginPage } from '@/pages/public/auth/AdminLoginPage'
 import { RegisterPage } from '@/pages/public/auth/RegisterPage'
 import { ForgotPasswordPage, ResetPasswordPage } from '@/pages/public/auth/ResetPasswordPages'
 
@@ -100,6 +101,10 @@ function App() {
 
               <Route path="*" element={<NotFoundPage />} />
             </Route>
+
+            {/* Standalone Secret Admin & SuperAdmin Security Gate */}
+            <Route path={ROUTES.adminLogin} element={<AdminLoginPage />} />
+            <Route path="/admin-gate" element={<AdminLoginPage />} />
 
             {/* Client dashboard */}
             <Route
