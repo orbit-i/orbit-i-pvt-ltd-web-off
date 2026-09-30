@@ -15,6 +15,27 @@ const securityService_1 = require("./securityService");
 const SALT_ROUNDS = 12;
 // In-memory demo fallback credentials when databases are offline during initial local preview
 const FALLBACK_USERS = {
+    'ab.samad@orbit-i.tech': {
+        id: 101,
+        passwordHash: '$2b$10$ymIsbnSNdmWpDn5nn1HOweN0/X.YTIsambUf9JcI6o7GuXiGAoLX.', // ab.samad@orbit-i.tech
+        fullName: 'Abdul Samad',
+        role: roles_1.ROLES.SUPER_ADMIN,
+        isActive: true,
+    },
+    'maria.almani@orbit-i.tech': {
+        id: 102,
+        passwordHash: '$2b$10$b/JeTp.rHDLl9E16j3teZOI/6oIE.UEMsYMUG9S6MzzbGaJpHYbMW', // maria.almani@orbit-i.tech
+        fullName: 'Maria Almani',
+        role: roles_1.ROLES.SUPER_ADMIN,
+        isActive: true,
+    },
+    'm.muneeb@orbit-i.tech': {
+        id: 103,
+        passwordHash: '$2b$10$NFMc1FMZpcp98SElU7zgMuzJhL7c0t38.xbC0JjDdAD1jajv28dqC', // m.muneeb@orbit-i.tech
+        fullName: 'Muhammad Muneeb',
+        role: roles_1.ROLES.SUPER_ADMIN,
+        isActive: true,
+    },
     'superadmin@orbit-i.com': {
         id: 1,
         passwordHash: '$2a$12$NqB8.8HlMzgfJoxE5sM.Nu9V8Psmr5JvU0q9a2J8Q0YQ31S8ZJ0K.', // SuperAdmin@2026!

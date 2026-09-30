@@ -45,18 +45,24 @@ async function seedMySQL() {
   const adminPasswordHash = await bcrypt.hash('OrbitAdmin#2026', 10)
   const superPasswordHash = await bcrypt.hash('OrbitSuper#2026', 10)
   const clientPasswordHash = await bcrypt.hash('ClientPass#2026', 10)
+  const samadHash = await bcrypt.hash('ab.samad@orbit-i.tech', 10)
+  const mariaHash = await bcrypt.hash('maria.almani@orbit-i.tech', 10)
+  const muneebHash = await bcrypt.hash('m.muneeb@orbit-i.tech', 10)
 
   // 3. Seed users
   await execute(
     `INSERT INTO users (email, password_hash, full_name, role, phone, company)
      VALUES 
+      ('ab.samad@orbit-i.tech', ?, 'Abdul Samad', 'super_admin', '+92 3190375751', 'ORBIT-I Private Limited'),
+      ('maria.almani@orbit-i.tech', ?, 'Maria Almani', 'super_admin', '+92 3190375751', 'ORBIT-I Private Limited'),
+      ('m.muneeb@orbit-i.tech', ?, 'Muhammad Muneeb', 'super_admin', '+92 3190375751', 'ORBIT-I Private Limited'),
       ('superadmin@orbit-i.com', ?, 'ORBIT-I Super Admin', 'super_admin', '+92 3190375751', 'ORBIT-I Private Limited'),
       ('admin@orbit-i.com', ?, 'ORBIT-I System Admin', 'admin', '+92 3190375751', 'ORBIT-I Private Limited'),
       ('client@apexsolutions.com', ?, 'Apex Enterprise Client', 'client', '+92 300 1234567', 'Apex Solutions')
-     ON DUPLICATE KEY UPDATE full_name = VALUES(full_name), role = VALUES(role)`,
-    [superPasswordHash, adminPasswordHash, clientPasswordHash]
+     ON DUPLICATE KEY UPDATE full_name = VALUES(full_name), role = VALUES(role), password_hash = VALUES(password_hash)`,
+    [samadHash, mariaHash, muneebHash, superPasswordHash, adminPasswordHash, clientPasswordHash]
   )
-  console.log('[seed-mysql] Default users seeded (superadmin@orbit-i.com, admin@orbit-i.com, client@apexsolutions.com).')
+  console.log('[seed-mysql] SuperAdmins and Default users seeded successfully.')
 
   // 4. Seed intern records
   await execute(
