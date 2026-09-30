@@ -40,21 +40,40 @@ This guide provides step-by-step instructions for deploying the ORBIT-I website,
 
 ## 3. Backend Deployment (Node.js on Hostinger)
 
-### Option A: Using Hostinger "Setup Node.js App" (cPanel / Cloud)
+> [!IMPORTANT]
+> **Hostinger Startup File & TypeScript Build Fix**:
+> - **Application Startup File**: Must be set to `app.js` (Recommended) or `dist/server.js`. **NEVER** set `dist/server.ts` or `src/server.ts`, because Node.js only runs JavaScript (`.js`) files.
+> - **Pre-compiled in Git**: The compiled JavaScript bundle in `server/dist/` is committed to the repository so your server can boot immediately on Hostinger even if Hostinger's runner does not run a build script.
+> - **Automatic Build Hooks**: `server/package.json` includes `"postinstall": "tsc -p tsconfig.json"` and `"prestart": "tsc -p tsconfig.json"`. When Hostinger runs `npm install` or starts the app, it compiles TypeScript automatically.
+> - **Self-Healing Entrypoint**: `server/app.js` automatically checks if `dist/server.js` is present; if missing, it compiles TypeScript on the fly before booting.
 
-1. In Hostinger cPanel, search for **Setup Node.js App**.
+### Option A: Using Hostinger "Setup Node.js App" (cPanel / hPanel)
+
+1. In Hostinger cPanel / hPanel, open **Setup Node.js App** (or **Node.js** in hPanel).
 2. Click **Create Application**:
-   - **Node.js Version**: `20.x` or `22.x`
+   - **Node.js Version**: `20.x` or `22.x` (18.x+ supported)
    - **Application Mode**: `Production`
    - **Application Root**: `server`
    - **Application URL**: `api.orbit-i.tech` (or `orbit-i.tech/api`)
-   - **Application Startup File**: `dist/server.js`
-3. Upload the `server` directory files (excluding `node_modules`).
-4. In cPanel Terminal or SSH:
+   - **Application Startup File**: `app.js` (or `dist/server.js`)
+3. Click **Create**.
+4. In the Application dashboard:
+   - Click **Run NPM Install** (or run `npm install` in terminal).
+   - If a **Build Command** field is available, set it to:
+     ```bash
+     bash build.sh
+     ```
+     or
+     ```bash
+     npm run build
+     ```
+5. If using Hostinger SSH / Terminal:
    ```bash
    cd server
-   npm install
-   npm run build
+   bash build.sh
+   # Or manually:
+   # npm install
+   # npm run build
    npm run seed:mysql
    ```
 5. Set Environment Variables in Hostinger Node.js app interface or in `server/.env`:
