@@ -18,6 +18,7 @@ import { BlogPage, BlogPostPage, BlogTaxonomyPage } from '@/pages/public/BlogPag
 import { TeamPage } from '@/pages/public/TeamPage'
 import { CareersPage, JobDetailPage } from '@/pages/public/CareersPages'
 import { ContactPage } from '@/pages/public/ContactPage'
+import { InternVerificationPage } from '@/pages/public/InternVerificationPage'
 import { PrivacyPolicyPage } from '@/pages/public/PrivacyPolicyPage'
 import { RefundPolicyPage } from '@/pages/public/RefundPolicyPage'
 import { TermsPage } from '@/pages/public/TermsPage'
@@ -40,6 +41,12 @@ import { AdminClientsPage } from '@/pages/admin/AdminClientsPage'
 import { AdminProductsPage } from '@/pages/admin/AdminProductsPage'
 import { AdminOrdersPage } from '@/pages/admin/AdminOrdersPage'
 import { AdminProjectsPage } from '@/pages/admin/AdminProjectsPage'
+import { AdminInternsPage } from '@/pages/admin/AdminInternsPage'
+import { AdminPaymentGatewaysPage } from '@/pages/admin/AdminPaymentGatewaysPage'
+import { PartnersPage } from '@/pages/public/PartnersPage'
+import { AdminPartnersPage } from '@/pages/admin/AdminPartnersPage'
+import { AdminCmsPages } from '@/pages/admin/AdminCmsPages'
+import { AdminTeamPage } from '@/pages/admin/AdminTeamPage'
 import {
   AdminCareersPage,
   AdminApplicationsPage,
@@ -48,7 +55,6 @@ import {
   AdminCategoriesPage,
   AdminTagsPage,
   AdminTestimonialsPage,
-  AdminTeamPage,
   AdminSettingsPage,
   AdminSeoDashboardPage,
 } from '@/pages/admin/AdminMiscPages'
@@ -75,9 +81,12 @@ function App() {
               <Route path="/blog/tag/:slug" element={<BlogTaxonomyPage type="tag" />} />
               <Route path="/blog/:slug" element={<BlogPostPage />} />
               <Route path={ROUTES.team} element={<TeamPage />} />
+              <Route path={ROUTES.partners} element={<PartnersPage />} />
               <Route path={ROUTES.careers} element={<CareersPage />} />
               <Route path="/careers/:id" element={<JobDetailPage />} />
               <Route path={ROUTES.contact} element={<ContactPage />} />
+              <Route path={ROUTES.internVerification} element={<InternVerificationPage />} />
+              <Route path="/verify-intern" element={<InternVerificationPage />} />
               <Route path={ROUTES.privacy} element={<PrivacyPolicyPage />} />
               <Route path={ROUTES.refundPolicy} element={<RefundPolicyPage />} />
               <Route path={ROUTES.terms} element={<TermsPage />} />
@@ -119,6 +128,10 @@ function App() {
               }
             >
               <Route path={ROUTES.adminDashboard} element={<AdminOverviewPage />} />
+              <Route path={ROUTES.adminInterns} element={<AdminInternsPage />} />
+              <Route path={ROUTES.adminPaymentGateways} element={<AdminPaymentGatewaysPage />} />
+              <Route path={ROUTES.adminPartners} element={<AdminPartnersPage />} />
+              <Route path={ROUTES.adminCmsPages} element={<AdminCmsPages />} />
               <Route path={ROUTES.adminClients} element={<AdminClientsPage />} />
               <Route path={ROUTES.adminProducts} element={<AdminProductsPage />} />
               <Route path={ROUTES.adminOrders} element={<AdminOrdersPage />} />

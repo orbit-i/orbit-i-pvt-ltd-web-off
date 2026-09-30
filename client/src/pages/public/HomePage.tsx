@@ -11,6 +11,7 @@ import {
   PenTool,
   Cloud,
   Sparkles,
+  CheckCircle2,
 } from 'lucide-react'
 import { LinkButton } from '@/components/ui'
 import { Card } from '@/components/ui/Card'
@@ -32,28 +33,26 @@ const serviceIcons: Record<string, typeof Code2> = {
   Sparkles,
 }
 
-const TECHNOLOGIES = ['React', 'TypeScript', 'Node.js', 'MongoDB', 'Docker', 'AWS']
-
 const WHY_ORBIT = [
   {
     icon: ShieldCheck,
-    title: 'Built to last',
-    description: 'Typed, tested, documented — code your team can pick up without a handoff call.',
+    title: 'Enterprise Architecture',
+    description: 'Typed, thoroughly tested, and documented codebases that scale cleanly without architectural debt.',
   },
   {
     icon: Gauge,
-    title: 'Shipped on schedule',
-    description: 'Clear phases and visible progress, so you always know what stage a project is at.',
+    title: 'Predictable Delivery',
+    description: 'Disciplined sprints, transparent milestones, and reliable production schedules with zero surprises.',
   },
   {
     icon: Layers,
-    title: 'Architected to scale',
-    description: 'We design for the load you\u2019ll have in a year, not just the demo you need next week.',
+    title: 'Scalable Systems',
+    description: 'Engineered for real-world transaction volume and high concurrency from initial deployment.',
   },
   {
     icon: Users2,
-    title: 'A team, not a ticket queue',
-    description: 'Direct access to the engineers building your product — no relay through account managers.',
+    title: 'Direct Senior Engineering',
+    description: 'Direct collaboration with lead software architects and system engineers — no intermediaries.',
   },
 ]
 
@@ -65,7 +64,6 @@ export function HomePage() {
       <AboutIntroSection />
       <ServicesSection />
       <WhyOrbitSection />
-      <TechnologiesSection />
       <CaseStudiesSection />
       <TestimonialsSection />
       <CtaSection />
@@ -75,38 +73,45 @@ export function HomePage() {
 
 function HeroSection() {
   return (
-    <section className="relative overflow-hidden pt-20 pb-24 lg:pt-28 lg:pb-32">
-      {/* ambient brand glow, echoing the logo's orbital ring */}
+    <section className="relative overflow-hidden bg-white pt-16 pb-20 lg:pt-24 lg:pb-28">
+      {/* Subtle radiant background glow */}
       <div
-        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[560px]"
-        style={{ background: 'var(--gradient-glow)' }}
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[520px]"
+        style={{
+          background: 'radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.06) 0%, rgba(37, 99, 235, 0) 70%)',
+        }}
         aria-hidden
       />
-      <div className="container-app grid items-center gap-16 lg:grid-cols-[1.05fr_0.95fr]">
+
+      <div className="container-app grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
         <div>
-          <Badge tone="primary" className="mb-6">
-            <span className="size-1.5 rounded-full bg-primary-400" /> Software & technology partner
-          </Badge>
-          <h1 className="text-4xl font-semibold leading-[1.08] tracking-tight text-[var(--color-text-primary)] sm:text-5xl lg:text-6xl">
-            Building digital solutions that{' '}
-            <span className="text-gradient-brand">move businesses forward</span>
+          <div className="inline-flex items-center gap-2 rounded-full border border-blue-200/80 bg-blue-50 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-blue-700 shadow-xs">
+            <span className="size-2 rounded-full bg-blue-600 animate-pulse" />
+            Software &amp; Technology Engineering Firm
+          </div>
+
+          <h1 className="mt-6 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl leading-[1.12]">
+            Engineering software solutions that{' '}
+            <span className="text-gradient-brand">accelerate enterprise growth</span>
           </h1>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-[var(--color-text-secondary)]">
-            ORBIT-I designs and builds web platforms, mobile apps, and custom software for companies
-            that need reliable engineering — not just another vendor.
+
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-600">
+            ORBIT-I designs, architects, and builds mission-critical web platforms, mobile apps, and custom software systems for forward-thinking enterprises that demand engineering excellence.
           </p>
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <LinkButton to={ROUTES.contact} size="lg">
-              Start a project <ArrowRight className="size-4" aria-hidden />
+
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <LinkButton to={ROUTES.contact} size="lg" className="shadow-md">
+              Start a Project <ArrowRight className="size-4" aria-hidden />
             </LinkButton>
-            <LinkButton to={ROUTES.caseStudies} size="lg" variant="outline">
-              View our work
+            <LinkButton to={ROUTES.services} size="lg" variant="outline">
+              Explore Services
             </LinkButton>
           </div>
-          <div className="mt-12 flex items-center gap-8 border-t border-[var(--color-border)] pt-8">
-            <StatBlock value="6+" label="Core service lines" />
-            <StatBlock value="TS" label="End-to-end type safety" />
-            <StatBlock value="24/7" label="Deployed system monitoring" />
+
+          <div className="mt-12 grid grid-cols-3 gap-6 border-t border-slate-200 pt-8">
+            <StatBlock value="99.9%" label="High Availability SLA" />
+            <StatBlock value="100%" label="Type-Safe Architecture" />
+            <StatBlock value="24/7" label="Continuous Systems Monitoring" />
           </div>
         </div>
 
@@ -119,33 +124,38 @@ function HeroSection() {
 function StatBlock({ value, label }: { value: string; label: string }) {
   return (
     <div>
-      <p className="font-display text-2xl font-semibold text-[var(--color-text-primary)]">{value}</p>
-      <p className="text-xs text-[var(--color-text-muted)]">{label}</p>
+      <p className="font-display text-2xl sm:text-3xl font-bold text-slate-900">{value}</p>
+      <p className="mt-1 text-xs sm:text-sm font-medium text-slate-500">{label}</p>
     </div>
   )
 }
 
-/** The hero's signature element: the brand mark set inside a slowly-rotating orbit ring, echoing the logo's own orbit path. */
 function OrbitHeroVisual() {
   return (
     <div className="relative mx-auto flex aspect-square w-full max-w-md items-center justify-center">
+      {/* Outer orbit circle */}
       <div
-        className="absolute inset-0 rounded-full border border-[var(--color-border-strong)]/60"
-        style={{ animation: 'spin 22s linear infinite' }}
+        className="absolute inset-0 rounded-full border border-blue-200/70"
+        style={{ animation: 'spin 26s linear infinite' }}
         aria-hidden
       >
-        <span className="absolute -top-1.5 left-1/2 size-3 -translate-x-1/2 rounded-full bg-[var(--color-accent-cyan)] shadow-[0_0_16px_var(--color-accent-cyan)]" />
+        <span className="absolute -top-1.5 left-1/2 size-3.5 -translate-x-1/2 rounded-full bg-blue-600 shadow-[0_0_12px_rgba(37,99,235,0.6)]" />
       </div>
+
+      {/* Inner orbit circle */}
       <div
-        className="absolute inset-10 rounded-full border border-[var(--color-border)]/70"
-        style={{ animation: 'spin 30s linear infinite reverse' }}
+        className="absolute inset-10 rounded-full border border-slate-200"
+        style={{ animation: 'spin 34s linear infinite reverse' }}
         aria-hidden
       >
-        <span className="absolute top-1/2 -right-1 size-2 -translate-y-1/2 rounded-full bg-[var(--color-silver-500)]" />
+        <span className="absolute top-1/2 -right-1.5 size-2.5 -translate-y-1/2 rounded-full bg-slate-400" />
       </div>
-      <div className="relative flex size-48 items-center justify-center rounded-full bg-[var(--color-surface)] shadow-[var(--shadow-lg)]">
-        <img src={orbitLogo} alt="" className="size-28 object-contain" aria-hidden />
+
+      {/* Center brand orb */}
+      <div className="relative flex size-52 items-center justify-center rounded-full bg-white shadow-xl border border-slate-100">
+        <img src={orbitLogo} alt="ORBIT-I Logo" className="size-32 object-contain" />
       </div>
+
       <style>{`
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @media (prefers-reduced-motion: reduce) {
@@ -158,39 +168,60 @@ function OrbitHeroVisual() {
 
 function AboutIntroSection() {
   return (
-    <section className="border-t border-[var(--color-border)] py-20">
-      <div className="container-app grid gap-12 lg:grid-cols-2 lg:items-center">
-        <div>
-          <p className="text-sm font-medium text-primary-400">Who we are</p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-[var(--color-text-primary)] sm:text-4xl">
-            A software company built around engineering discipline
+    <section className="border-t border-slate-200 bg-slate-50/60 py-20 lg:py-24">
+      <div className="container-app">
+        {/* Centered section header adhering to UI/UX hierarchy */}
+        <div className="mx-auto max-w-3xl text-center">
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-blue-700">
+            About ORBIT-I
+          </div>
+          <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+            A technology partner built on engineering discipline
           </h2>
-          <p className="mt-5 leading-relaxed text-[var(--color-text-secondary)]">
-            ORBIT-I Private Limited works with businesses that need software built right the first
-            time — from internal tools that replace spreadsheets to customer-facing platforms that
-            need to hold up under real usage. We keep teams small, architecture clear, and
-            communication direct.
+          <p className="mt-4 text-base sm:text-lg leading-relaxed text-slate-600">
+            ORBIT-I Private Limited designs and builds software for companies that need it done properly — reliable architecture, honest timelines, and code that outlives the project that created it.
           </p>
+        </div>
+
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <Card hoverable={false} className="flex flex-col gap-3 p-7 bg-white shadow-xs border-slate-200">
+            <div className="flex size-10 items-center justify-center rounded-lg bg-blue-50 text-blue-600 font-bold text-sm">
+              01
+            </div>
+            <h3 className="font-display text-xl font-bold text-slate-900">Engineering Clarity</h3>
+            <p className="text-sm leading-relaxed text-slate-600">
+              We choose robust, maintainable architecture over fragile shortcuts. Every system is structured for clarity and long-term maintainability.
+            </p>
+          </Card>
+
+          <Card hoverable={false} className="flex flex-col gap-3 p-7 bg-white shadow-xs border-slate-200">
+            <div className="flex size-10 items-center justify-center rounded-lg bg-blue-50 text-blue-600 font-bold text-sm">
+              02
+            </div>
+            <h3 className="font-display text-xl font-bold text-slate-900">Direct Collaboration</h3>
+            <p className="text-sm leading-relaxed text-slate-600">
+              You collaborate directly with the engineers architecting and writing your software, ensuring transparent communication and rapid feedback cycles.
+            </p>
+          </Card>
+
+          <Card hoverable={false} className="flex flex-col gap-3 p-7 bg-white shadow-xs border-slate-200 sm:col-span-2 lg:col-span-1">
+            <div className="flex size-10 items-center justify-center rounded-lg bg-blue-50 text-blue-600 font-bold text-sm">
+              03
+            </div>
+            <h3 className="font-display text-xl font-bold text-slate-900">True Client Ownership</h3>
+            <p className="text-sm leading-relaxed text-slate-600">
+              We deliver complete code ownership, transparent documentation, and cloud infrastructure setup so your internal team can operate independently.
+            </p>
+          </Card>
+        </div>
+
+        <div className="mt-10 text-center">
           <Link
             to={ROUTES.about}
-            className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary-400 hover:text-primary-300"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-700 transition-colors"
           >
-            More about ORBIT-I <ArrowRight className="size-4" aria-hidden />
+            Learn more about our methodology &amp; leadership <ArrowRight className="size-4" aria-hidden />
           </Link>
-        </div>
-        <div className="grid grid-cols-2 gap-4">
-          <Card hoverable={false} className="flex flex-col gap-2">
-            <p className="font-display text-xl font-semibold text-[var(--color-text-primary)]">Mission</p>
-            <p className="text-sm text-[var(--color-text-secondary)]">
-              Build software that removes real friction from how our clients operate.
-            </p>
-          </Card>
-          <Card hoverable={false} className="flex flex-col gap-2">
-            <p className="font-display text-xl font-semibold text-[var(--color-text-primary)]">Approach</p>
-            <p className="text-sm text-[var(--color-text-secondary)]">
-              Clear architecture, honest timelines, and code your team can own long-term.
-            </p>
-          </Card>
         </div>
       </div>
     </section>
@@ -202,49 +233,62 @@ function ServicesSection() {
   const displayServices = (services ?? []).slice(0, 6)
 
   return (
-    <section className="border-t border-[var(--color-border)] py-20">
+    <section className="border-t border-slate-200 bg-white py-20 lg:py-24">
       <div className="container-app">
-        <div className="mb-12 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
-          <div>
-            <p className="text-sm font-medium text-primary-400">What we do</p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-[var(--color-text-primary)] sm:text-4xl">
-              Services built around your product
-            </h2>
+        {/* Centered header adhering to UX psychology */}
+        <div className="mx-auto max-w-3xl text-center">
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-blue-700">
+            Core Capabilities
           </div>
-          <LinkButton to={ROUTES.services} variant="outline">
-            All services
-          </LinkButton>
+          <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+            Software services tailored to your objectives
+          </h2>
+          <p className="mt-4 text-base sm:text-lg leading-relaxed text-slate-600">
+            From greenfield architecture to scaling high-throughput systems, every engagement follows proven engineering standards.
+          </p>
         </div>
+
         {isLoading ? (
-          <div className="py-10"><PageLoader /></div>
+          <div className="py-16"><PageLoader /></div>
         ) : (
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {displayServices.map((service) => {
               const Icon = serviceIcons[service.icon] ?? Code2
               return (
-                <Card key={service.id} className="flex flex-col gap-4">
-                  <div className="flex size-11 items-center justify-center rounded-[var(--radius-md)] bg-primary-500/10 text-primary-300">
-                    <Icon className="size-5" aria-hidden />
+                <Card key={service.id} className="group flex flex-col gap-4 p-7 bg-white border-slate-200 hover:border-blue-300 hover:shadow-md transition-all">
+                  <div className="flex size-12 items-center justify-center rounded-xl bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                    <Icon className="size-6" aria-hidden />
                   </div>
                   <div>
-                    <h3 className="font-display text-lg font-semibold text-[var(--color-text-primary)]">
+                    <h3 className="font-display text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
                       {service.title}
                     </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">
+                    <p className="mt-2.5 text-sm leading-relaxed text-slate-600">
                       {service.summary}
                     </p>
                   </div>
-                  <Link
-                    to={ROUTES.serviceDetail(service.slug)}
-                    className="mt-auto inline-flex items-center gap-1.5 text-sm font-medium text-primary-400 hover:text-primary-300"
-                  >
-                    Learn more <ArrowRight className="size-3.5" aria-hidden />
-                  </Link>
+                  <div className="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
+                    <span className="text-xs font-medium text-slate-400">
+                      {service.technologies?.slice(0, 2).join(' · ')}
+                    </span>
+                    <Link
+                      to={ROUTES.serviceDetail(service.slug)}
+                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 hover:text-blue-700"
+                    >
+                      Details <ArrowRight className="size-3.5" aria-hidden />
+                    </Link>
+                  </div>
                 </Card>
               )
             })}
           </div>
         )}
+
+        <div className="mt-12 text-center">
+          <LinkButton to={ROUTES.services} variant="outline" size="lg">
+            View All Services
+          </LinkButton>
+        </div>
       </div>
     </section>
   )
@@ -252,42 +296,34 @@ function ServicesSection() {
 
 function WhyOrbitSection() {
   return (
-    <section className="border-t border-[var(--color-border)] bg-[var(--color-background-elevated)] py-20">
+    <section className="border-t border-slate-200 bg-slate-50/70 py-20 lg:py-24">
       <div className="container-app">
-        <p className="text-sm font-medium text-primary-400">Why ORBIT-I</p>
-        <h2 className="mt-3 max-w-xl text-3xl font-semibold tracking-tight text-[var(--color-text-primary)] sm:text-4xl">
-          What working with us actually looks like
-        </h2>
-        <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Centered header adhering to UX typography */}
+        <div className="mx-auto max-w-3xl text-center">
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-blue-700">
+            The ORBIT-I Standard
+          </div>
+          <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+            Why leading businesses partner with us
+          </h2>
+          <p className="mt-4 text-base sm:text-lg leading-relaxed text-slate-600">
+            We focus on software discipline, system resilience, and predictable outcomes rather than empty marketing buzzwords.
+          </p>
+        </div>
+
+        <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {WHY_ORBIT.map((item) => (
-            <div key={item.title}>
-              <div className="flex size-10 items-center justify-center rounded-full border border-[var(--color-border-strong)] text-primary-300">
-                <item.icon className="size-4.5" aria-hidden />
+            <div key={item.title} className="rounded-xl border border-slate-200 bg-white p-6 shadow-xs">
+              <div className="flex size-11 items-center justify-center rounded-lg bg-blue-50 text-blue-600">
+                <item.icon className="size-5" aria-hidden />
               </div>
-              <h3 className="mt-4 font-display text-base font-semibold text-[var(--color-text-primary)]">
+              <h3 className="mt-4 font-display text-lg font-bold text-slate-900">
                 {item.title}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">
+              <p className="mt-2 text-sm leading-relaxed text-slate-600">
                 {item.description}
               </p>
             </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function TechnologiesSection() {
-  return (
-    <section className="border-t border-[var(--color-border)] py-16">
-      <div className="container-app flex flex-col items-center gap-8 text-center">
-        <p className="text-sm font-medium text-[var(--color-text-muted)]">Our core technology stack</p>
-        <div className="flex flex-wrap items-center justify-center gap-3">
-          {TECHNOLOGIES.map((tech) => (
-            <Badge key={tech} tone="neutral" className="px-4 py-2 text-sm">
-              {tech}
-            </Badge>
           ))}
         </div>
       </div>
@@ -302,41 +338,62 @@ function CaseStudiesSection() {
   if (!isLoading && displayStudies.length === 0) return null
 
   return (
-    <section className="border-t border-[var(--color-border)] py-20">
+    <section className="border-t border-slate-200 bg-white py-20 lg:py-24">
       <div className="container-app">
-        <div className="mb-12 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
-          <div>
-            <p className="text-sm font-medium text-primary-400">Case studies</p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-[var(--color-text-primary)] sm:text-4xl">
-              Recent work
-            </h2>
+        {/* Centered header */}
+        <div className="mx-auto max-w-3xl text-center">
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-blue-700">
+            Proven Results
           </div>
-          <LinkButton to={ROUTES.caseStudies} variant="outline">
-            All case studies
-          </LinkButton>
+          <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+            Featured engineering case studies
+          </h2>
+          <p className="mt-4 text-base sm:text-lg leading-relaxed text-slate-600">
+            Explore how we solved critical technical challenges and built scalable platforms for real-world clients.
+          </p>
         </div>
+
         {isLoading ? (
-          <div className="py-10"><PageLoader /></div>
+          <div className="py-16"><PageLoader /></div>
         ) : (
-          <div className="grid gap-5 sm:grid-cols-2">
+          <div className="mt-14 grid gap-6 sm:grid-cols-2">
             {displayStudies.map((study) => (
-              <Link key={study.id} to={ROUTES.caseStudyDetail(study.slug)}>
-                <Card className="h-full">
-                  <Badge tone="primary" className="mb-4">
-                    {study.clientIndustry}
-                  </Badge>
-                  <h3 className="font-display text-xl font-semibold text-[var(--color-text-primary)]">
+              <Link key={study.id} to={ROUTES.caseStudyDetail(study.slug)} className="group">
+                <Card className="h-full p-8 border-slate-200 bg-white group-hover:border-blue-300 group-hover:shadow-md transition-all">
+                  <div className="flex items-center justify-between">
+                    <Badge tone="primary" className="text-xs">
+                      {study.clientIndustry}
+                    </Badge>
+                    <span className="text-xs font-semibold text-slate-400 group-hover:text-blue-600 transition-colors">
+                      View Case Study &rarr;
+                    </span>
+                  </div>
+                  <h3 className="mt-4 font-display text-2xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
                     {study.projectName}
                   </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-[var(--color-text-secondary)]">{study.problem}</p>
-                  <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary-400">
-                    Read the case study <ArrowRight className="size-3.5" aria-hidden />
-                  </span>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{study.problem}</p>
+                  
+                  {study.results && study.results.length > 0 && (
+                    <div className="mt-6 border-t border-slate-100 pt-4 flex flex-col gap-2">
+                      {study.results.slice(0, 2).map((res, i) => (
+                        <div key={i} className="flex items-center gap-2 text-xs text-slate-700">
+                          <CheckCircle2 className="size-4 text-emerald-600 shrink-0" />
+                          <span>{res}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </Card>
               </Link>
             ))}
           </div>
         )}
+
+        <div className="mt-12 text-center">
+          <LinkButton to={ROUTES.caseStudies} variant="outline" size="lg">
+            Browse All Case Studies
+          </LinkButton>
+        </div>
       </div>
     </section>
   )
@@ -349,19 +406,31 @@ function TestimonialsSection() {
   if (!isLoading && displayTestimonials.length === 0) return null
 
   return (
-    <section className="border-t border-[var(--color-border)] bg-[var(--color-background-elevated)] py-20">
+    <section className="border-t border-slate-200 bg-slate-50/70 py-20 lg:py-24">
       <div className="container-app">
-        <p className="text-sm font-medium text-primary-400">Client feedback</p>
+        {/* Centered header */}
+        <div className="mx-auto max-w-3xl text-center">
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-blue-700">
+            Client Feedback
+          </div>
+          <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+            Trusted by founders and engineering leaders
+          </h2>
+          <p className="mt-4 text-base sm:text-lg leading-relaxed text-slate-600">
+            Read what executives and teams have to say about collaborating with ORBIT-I.
+          </p>
+        </div>
+
         {isLoading ? (
-          <div className="py-10"><PageLoader /></div>
+          <div className="py-16"><PageLoader /></div>
         ) : (
-          <div className="mt-10 grid gap-6 lg:grid-cols-2">
+          <div className="mt-14 grid gap-6 lg:grid-cols-2">
             {displayTestimonials.map((testimonial) => (
-              <Card key={testimonial.id} hoverable={false} className="flex flex-col gap-5">
-                <p className="text-lg leading-relaxed text-[var(--color-text-primary)]">“{testimonial.quote}”</p>
-                <div>
-                  <p className="text-sm font-semibold text-[var(--color-text-primary)]">{testimonial.authorName}</p>
-                  <p className="text-xs text-[var(--color-text-muted)]">
+              <Card key={testimonial.id} hoverable={false} className="flex flex-col justify-between p-8 bg-white border-slate-200 shadow-xs">
+                <p className="text-base sm:text-lg leading-relaxed text-slate-800 italic">“{testimonial.quote}”</p>
+                <div className="mt-6 border-t border-slate-100 pt-4">
+                  <p className="text-sm font-bold text-slate-900">{testimonial.authorName}</p>
+                  <p className="text-xs text-slate-500">
                     {testimonial.authorRole} · {testimonial.company}
                   </p>
                 </div>
@@ -376,22 +445,27 @@ function TestimonialsSection() {
 
 function CtaSection() {
   return (
-    <section className="border-t border-[var(--color-border)] py-24">
+    <section className="border-t border-slate-200 bg-white py-20 lg:py-28">
       <div className="container-app">
-        <Card
-          hoverable={false}
-          className="flex flex-col items-center gap-6 border-primary-500/25 bg-[image:var(--gradient-surface)] py-16 text-center"
-        >
-          <h2 className="max-w-2xl text-3xl font-semibold tracking-tight text-[var(--color-text-primary)] sm:text-4xl">
-            Have a project in mind?
+        <div className="rounded-2xl border border-blue-200 bg-gradient-to-b from-blue-50/60 to-white p-10 sm:p-16 text-center shadow-xs">
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-100/60 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-blue-700 mb-4">
+            Ready to Build?
+          </div>
+          <h2 className="mx-auto max-w-2xl text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+            Let's build software that powers your business
           </h2>
-          <p className="max-w-lg text-[var(--color-text-secondary)]">
-            Tell us what you're building. We'll get back to you with next steps within one business day.
+          <p className="mx-auto mt-4 max-w-xl text-base sm:text-lg text-slate-600">
+            Tell us about your product roadmap. Our software architects will review your requirements and provide technical guidance within one business day.
           </p>
-          <LinkButton to={ROUTES.contact} size="lg">
-            Get in touch <ArrowRight className="size-4" aria-hidden />
-          </LinkButton>
-        </Card>
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <LinkButton to={ROUTES.contact} size="lg" className="shadow-md">
+              Schedule Technical Consultation <ArrowRight className="size-4" aria-hidden />
+            </LinkButton>
+            <LinkButton to={ROUTES.caseStudies} size="lg" variant="outline">
+              Review Past Projects
+            </LinkButton>
+          </div>
+        </div>
       </div>
     </section>
   )

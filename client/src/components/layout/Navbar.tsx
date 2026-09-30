@@ -40,10 +40,10 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        'sticky top-0 z-50 w-full border-b transition-colors duration-300',
+        'sticky top-0 z-50 w-full border-b transition-colors duration-200',
         isScrolled
-          ? 'border-[var(--color-border)] bg-[var(--color-background)]/85 backdrop-blur-lg'
-          : 'border-transparent bg-transparent'
+          ? 'border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)]'
+          : 'border-[var(--color-border)]/60 bg-[var(--color-background)]'
       )}
     >
       <nav className="container-app flex h-[var(--header-height)] items-center justify-between">
@@ -98,14 +98,14 @@ export function Navbar() {
                 <div className="absolute right-0 mt-2 w-52 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] p-1.5 shadow-[var(--shadow-lg)]">
                   <Link
                     to={dashboardRoute}
-                    className="flex items-center gap-2 rounded-[var(--radius-sm)] px-3 py-2 text-sm text-[var(--color-text-primary)] hover:bg-white/5"
+                    className="flex items-center gap-2 rounded-[var(--radius-sm)] px-3 py-2 text-sm text-[var(--color-text-primary)] hover:bg-black/5"
                     onClick={() => setIsAccountOpen(false)}
                   >
                     <LayoutDashboard className="size-4" aria-hidden /> Dashboard
                   </Link>
                   <Link
                     to={ROUTES.clientProfile}
-                    className="flex items-center gap-2 rounded-[var(--radius-sm)] px-3 py-2 text-sm text-[var(--color-text-primary)] hover:bg-white/5"
+                    className="flex items-center gap-2 rounded-[var(--radius-sm)] px-3 py-2 text-sm text-[var(--color-text-primary)] hover:bg-black/5"
                     onClick={() => setIsAccountOpen(false)}
                   >
                     <UserIcon className="size-4" aria-hidden /> Profile
@@ -125,18 +125,20 @@ export function Navbar() {
           )}
         </div>
 
-        <button
-          className="text-[var(--color-text-primary)] lg:hidden"
-          onClick={() => setIsMobileOpen((v) => !v)}
-          aria-label={isMobileOpen ? 'Close menu' : 'Open menu'}
-          aria-expanded={isMobileOpen}
-        >
-          {isMobileOpen ? <X className="size-6" /> : <Menu className="size-6" />}
-        </button>
+        <div className="flex items-center gap-2 lg:hidden">
+          <button
+            className="rounded-[var(--radius-sm)] border border-[var(--color-border)] p-1.5 text-[var(--color-text-primary)]"
+            onClick={() => setIsMobileOpen((v) => !v)}
+            aria-label={isMobileOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isMobileOpen}
+          >
+            {isMobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+          </button>
+        </div>
       </nav>
 
       {isMobileOpen && (
-        <div className="border-t border-[var(--color-border)] bg-[var(--color-background)] px-5 pb-6 pt-2 lg:hidden">
+        <div className="border-t border-[var(--color-border)] bg-[var(--color-surface)] px-5 pb-6 pt-2 lg:hidden">
           <div className="flex flex-col gap-1">
             {MAIN_NAV_LINKS.map((link) => (
               <NavLink
@@ -147,7 +149,7 @@ export function Navbar() {
                 className={({ isActive }) =>
                   cn(
                     'rounded-[var(--radius-sm)] px-3 py-2.5 text-sm font-medium',
-                    isActive ? 'bg-white/5 text-[var(--color-text-primary)]' : 'text-[var(--color-text-secondary)]'
+                    isActive ? 'bg-primary-500/10 text-primary-400 font-semibold' : 'text-[var(--color-text-secondary)]'
                   )
                 }
               >

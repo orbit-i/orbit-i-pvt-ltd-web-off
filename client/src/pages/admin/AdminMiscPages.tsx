@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Plus } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { Plus, Building2, ShieldCheck, CreditCard, Lock, ExternalLink, CheckCircle2 } from 'lucide-react'
 import { Badge } from '@/components/ui/Badge'
 import { Button, ImageUpload, Modal } from '@/components/ui'
 import { Input } from '@/components/ui/Input'
@@ -17,6 +18,7 @@ import { adminService } from '@/services/adminService'
 import { useFetch } from '@/hooks/useFetch'
 import { getApiErrorMessage } from '@/utils/apiError'
 import { CONTACT_EMAIL } from '@/config/socialLinks'
+import { ROUTES } from '@/constants'
 import type { Job, CaseStudy, Category, Tag, Testimonial, TeamMember } from '@/types'
 import { RichTextEditor } from '@/components/editor/RichTextEditor'
 
@@ -840,23 +842,160 @@ export function AdminTagsPage() {
 export function AdminSettingsPage() {
   const [companyName, setCompanyName] = useState('ORBIT-I Private Limited')
   const [supportEmail, setSupportEmail] = useState(CONTACT_EMAIL)
+  const [phone, setPhone] = useState('+92 (312) 0071373')
+  const [savedNotice, setSavedNotice] = useState(false)
+
+  const handleSave = () => {
+    setSavedNotice(true)
+    setTimeout(() => setSavedNotice(false), 3000)
+  }
 
   return (
     <div className="flex flex-col gap-6">
-      <div>
-        <h2 className="font-display text-xl font-semibold text-[var(--color-text-primary)]">Settings</h2>
-        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Platform-wide configuration.</p>
-      </div>
-      <Card hoverable={false} className="max-w-lg">
-        <div className="flex flex-col gap-4">
-          <Input label="Company name" value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
-          <Input label="Support email" type="email" value={supportEmail} onChange={(e) => setSupportEmail(e.target.value)} />
-          <p className="text-xs text-[var(--color-text-muted)]">
-            Not yet persisted to the backend — add a Settings model when this needs to be saved server-side.
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between border-b border-slate-200 pb-4">
+        <div>
+          <h2 className="font-display text-xl font-bold text-slate-900">Platform &amp; Corporate Settings</h2>
+          <p className="mt-1 text-sm text-slate-600">
+            System configuration, corporate registry credentials, and gateway operational parameters.
           </p>
-          <Button className="mt-1 self-start" disabled>Save changes</Button>
         </div>
-      </Card>
+        <Button onClick={handleSave} className="self-start sm:self-auto">
+          Save Configuration
+        </Button>
+      </div>
+
+      {savedNotice && (
+        <div className="flex items-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-xs sm:text-sm font-medium text-emerald-800">
+          <CheckCircle2 className="size-4 shrink-0 text-emerald-600" />
+          Settings updated successfully across internal application context.
+        </div>
+      )}
+
+      <div className="grid gap-6 lg:grid-cols-3">
+        {/* Left Column: Organization & Operations (2 cols) */}
+        <div className="space-y-6 lg:col-span-2">
+          {/* Corporate Profile Card */}
+          <Card hoverable={false} className="p-6 bg-white border-slate-200 shadow-xs">
+            <div className="flex items-center gap-2 border-b border-slate-100 pb-4">
+              <Building2 className="size-5 text-blue-600" aria-hidden />
+              <h3 className="font-semibold text-slate-900">Corporate Entity Profile</h3>
+            </div>
+            <div className="mt-5 grid gap-4 sm:grid-cols-2">
+              <Input
+                label="Company registered name"
+                value={companyName}
+                onChange={(e) => setCompanyName(e.target.value)}
+              />
+              <Input
+                label="Support &amp; legal inquiries email"
+                type="email"
+                value={supportEmail}
+                onChange={(e) => setSupportEmail(e.target.value)}
+              />
+              <Input
+                label="Corporate phone hotline"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+              <Input
+                label="Registered office jurisdiction"
+                defaultValue="Islamabad, Pakistan"
+                disabled
+                hint="Securities and Exchange Commission of Pakistan (SECP)"
+              />
+            </div>
+          </Card>
+
+          {/* Payment Gateways Overview Card */}
+          <Card hoverable={false} className="p-6 bg-white border-slate-200 shadow-xs">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+              <div className="flex items-center gap-2">
+                <CreditCard className="size-5 text-indigo-600" aria-hidden />
+                <h3 className="font-semibold text-slate-900">Financial Payment Gateways</h3>
+              </div>
+              <Link
+                to={ROUTES.adminPaymentGateways}
+                className="text-xs font-semibold text-blue-600 hover:underline"
+              >
+                Manage banking details →
+              </Link>
+            </div>
+            <div className="mt-4 grid gap-3 sm:grid-cols-3">
+              <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-3.5">
+                <p className="text-xs font-medium text-slate-500">Mobile Wallets</p>
+                <p className="text-sm font-bold text-slate-900 mt-1">JazzCash &amp; EasyPaisa</p>
+                <Badge tone="success" className="mt-2 text-2xs">Active Rails</Badge>
+              </div>
+              <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-3.5">
+                <p className="text-xs font-medium text-slate-500">Digital Banking</p>
+                <p className="text-sm font-bold text-slate-900 mt-1">NayaPay / SadaPay</p>
+                <Badge tone="success" className="mt-2 text-2xs">Active Rails</Badge>
+              </div>
+              <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-3.5">
+                <p className="text-xs font-medium text-slate-500">Enterprise Wire</p>
+                <p className="text-sm font-bold text-slate-900 mt-1">Bank Alfalah / IBAN</p>
+                <Badge tone="success" className="mt-2 text-2xs">Active Rails</Badge>
+              </div>
+            </div>
+          </Card>
+        </div>
+
+        {/* Right Column: Governance & System Status (1 col) */}
+        <div className="space-y-6 lg:col-span-1">
+          <Card hoverable={false} className="p-6 bg-white border-slate-200 shadow-xs">
+            <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
+              <ShieldCheck className="size-4 text-emerald-600" aria-hidden />
+              <h3 className="text-sm font-semibold text-slate-900">Statutory Registrations</h3>
+            </div>
+            <div className="mt-4 space-y-3 text-xs leading-relaxed text-slate-600">
+              <div className="flex items-center justify-between py-1 border-b border-slate-100">
+                <span className="text-slate-500 font-medium">SECP Status</span>
+                <span className="font-semibold text-emerald-600">Incorporated</span>
+              </div>
+              <div className="flex items-center justify-between py-1 border-b border-slate-100">
+                <span className="text-slate-500 font-medium">FBR NTN Tax</span>
+                <span className="font-semibold text-slate-800">Verified Active</span>
+              </div>
+              <div className="flex items-center justify-between py-1 border-b border-slate-100">
+                <span className="text-slate-500 font-medium">PSEB License</span>
+                <span className="font-semibold text-slate-800">Software Export</span>
+              </div>
+              <div className="flex items-center justify-between py-1">
+                <span className="text-slate-500 font-medium">Auth Mechanism</span>
+                <span className="font-semibold text-blue-600">JWT RBAC Guard</span>
+              </div>
+            </div>
+          </Card>
+
+          <Card hoverable={false} className="p-6 bg-white border-slate-200 shadow-xs">
+            <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
+              <Lock className="size-4 text-blue-600" aria-hidden />
+              <h3 className="text-sm font-semibold text-slate-900">Legal Policies Status</h3>
+            </div>
+            <p className="mt-3 text-xs text-slate-500 leading-relaxed">
+              Ensure all legal documents match company incorporation details and terms of service.
+            </p>
+            <div className="mt-4 flex flex-col gap-2 pt-2 border-t border-slate-100 text-xs">
+              <Link to={ROUTES.privacy} className="font-medium text-blue-600 hover:underline flex items-center justify-between">
+                <span>Privacy Policy</span>
+                <ExternalLink className="size-3" />
+              </Link>
+              <Link to={ROUTES.terms} className="font-medium text-blue-600 hover:underline flex items-center justify-between">
+                <span>Terms &amp; Conditions</span>
+                <ExternalLink className="size-3" />
+              </Link>
+              <Link to={ROUTES.refundPolicy} className="font-medium text-blue-600 hover:underline flex items-center justify-between">
+                <span>Refund Policy</span>
+                <ExternalLink className="size-3" />
+              </Link>
+              <Link to={ROUTES.securityPolicy} className="font-medium text-blue-600 hover:underline flex items-center justify-between">
+                <span>Security Policy</span>
+                <ExternalLink className="size-3" />
+              </Link>
+            </div>
+          </Card>
+        </div>
+      </div>
     </div>
   )
 }

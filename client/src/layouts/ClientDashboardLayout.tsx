@@ -47,7 +47,7 @@ export function ClientDashboardLayout() {
       />
       <div className="flex flex-1 flex-col lg:pl-0">
         <DashboardHeader title={titleByPath[pathname] ?? 'Dashboard'} onMenuClick={() => setIsSidebarOpen(true)} />
-        <main className="flex-1 px-5 py-6 lg:px-8 lg:py-8">
+        <main className="flex-1 px-4 py-6 sm:px-6 lg:px-8 lg:py-8 max-w-7xl mx-auto w-full">
           <Outlet />
         </main>
       </div>

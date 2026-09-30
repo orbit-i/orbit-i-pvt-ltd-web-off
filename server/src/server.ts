@@ -1,11 +1,13 @@
 import app from './app'
 import { env } from './config/env'
 import { connectDatabase } from './config/db'
+import { initMySQL } from './config/mysql'
 import dns from "node:dns";
 dns.setServers(["8.8.8.8"]);
 
 async function start() {
   await connectDatabase()
+  await initMySQL()
 
   const server = app.listen(env.port, () => {
     console.log(`[server] ORBIT-I API listening on port ${env.port} (${env.nodeEnv})`)

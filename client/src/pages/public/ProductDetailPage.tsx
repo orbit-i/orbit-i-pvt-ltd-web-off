@@ -60,29 +60,29 @@ export function ProductDetailPage() {
 
   return (
     <div className="pb-24">
-      <section className="border-b border-[var(--color-border)] py-20">
+      <section className="border-b border-slate-200 bg-white py-16 sm:py-20">
         <div className="container-app grid gap-12 lg:grid-cols-[1.4fr_1fr]">
           <div>
-            <Link to={ROUTES.products} className="text-sm text-[var(--color-text-secondary)] hover:text-primary-300">
-              ← All products
+            <Link to={ROUTES.products} className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 hover:text-blue-700">
+              &larr; All Products
             </Link>
             <div className="mt-5 flex items-center gap-2">
-              <Badge tone="neutral">{product.category?.name}</Badge>
+              <Badge tone="neutral">{product.category?.name || 'SaaS'}</Badge>
               <Badge tone={statusTone[product.status]}>{statusLabel[product.status]}</Badge>
             </div>
-            <h1 className="mt-5 text-4xl font-semibold tracking-tight text-[var(--color-text-primary)] sm:text-5xl">
+            <h1 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 leading-[1.15]">
               {product.name}
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-[var(--color-text-secondary)]">
+            <p className="mt-4 max-w-xl text-lg leading-relaxed text-slate-600">
               {product.description}
             </p>
 
-            <div className="mt-10">
-              <h2 className="text-lg font-semibold text-[var(--color-text-primary)]">Features</h2>
+            <div className="mt-10 border-t border-slate-100 pt-8">
+              <h2 className="text-xl font-bold text-slate-900">Core Features &amp; Capabilities</h2>
               <ul className="mt-4 grid gap-3 sm:grid-cols-2">
                 {product.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-2.5 text-sm text-[var(--color-text-secondary)]">
-                    <Check className="mt-0.5 size-4 shrink-0 text-primary-400" aria-hidden />
+                  <li key={feature} className="flex items-start gap-2.5 rounded-lg border border-slate-100 bg-slate-50/50 p-3 text-sm font-medium text-slate-800">
+                    <Check className="mt-0.5 size-4 shrink-0 text-emerald-600" aria-hidden />
                     {feature}
                   </li>
                 ))}
@@ -90,29 +90,29 @@ export function ProductDetailPage() {
             </div>
           </div>
 
-          <Card hoverable={false} className="h-fit lg:sticky lg:top-28">
-            <p className="text-sm text-[var(--color-text-secondary)]">Starting at</p>
-            <p className="mt-1 font-display text-4xl font-semibold text-[var(--color-text-primary)]">
+          <Card hoverable={false} className="h-fit p-8 border-slate-200 bg-white shadow-xs lg:sticky lg:top-28">
+            <p className="text-sm font-medium text-slate-500">Subscription pricing</p>
+            <p className="mt-1 font-display text-4xl font-bold text-slate-900">
               ${product.price}
-              <span className="text-base font-normal text-[var(--color-text-muted)]">/month</span>
+              <span className="text-base font-normal text-slate-500">/month</span>
             </p>
-            <p className="mt-2 text-xs text-[var(--color-text-muted)]">Billed monthly. Cancel anytime.</p>
+            <p className="mt-2 text-xs text-slate-500">Billed monthly. Cancel anytime. SLA guarantee.</p>
 
             {product.status === 'available' ? (
               <>
-                <Button className="mt-6 w-full" size="lg" isLoading={isOrdering} onClick={handleOrder}>
-                  {isOrdering ? 'Starting order…' : isAuthenticated ? 'Start order' : 'Log in to order'}
+                <Button className="mt-6 w-full shadow-md" size="lg" isLoading={isOrdering} onClick={handleOrder}>
+                  {isOrdering ? 'Starting order…' : isAuthenticated ? 'Start Order Now' : 'Log in to Subscribe'}
                 </Button>
-                {orderError && <p className="mt-3 text-center text-xs text-[var(--color-danger)]">{orderError}</p>}
+                {orderError && <p className="mt-3 text-center text-xs text-red-600">{orderError}</p>}
                 {!orderError && (
-                  <p className="mt-3 text-center text-xs text-[var(--color-text-muted)]">
-                    {isAuthenticated ? "You'll see this order in your dashboard." : "You'll need an account to complete checkout."}
+                  <p className="mt-3 text-center text-xs text-slate-500">
+                    {isAuthenticated ? "You'll see this order in your client dashboard." : "You'll need a client account to complete setup."}
                   </p>
                 )}
               </>
             ) : (
               <Button className="mt-6 w-full" size="lg" variant="outline" disabled>
-                Coming soon
+                Coming Soon
               </Button>
             )}
           </Card>

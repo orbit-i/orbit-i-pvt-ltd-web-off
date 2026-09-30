@@ -8,7 +8,8 @@
     "build": "tsc -p tsconfig.json",
     "start": "node dist/server.js",
     "typecheck": "tsc --noEmit",
-    "seed": "tsx src/scripts/seed.ts"
+    "seed": "tsx src/scripts/seed.ts",
+    "seed:mysql": "tsx src/scripts/seed-mysql.ts"
   },
   "keywords": [],
   "author": "",
@@ -28,6 +29,7 @@
     "mongoose": "^9.9.4",
     "morgan": "^1.11.0",
     "multer": "^2.3.0",
+    "mysql2": "^3.24.4",
     "zod": "^4.4.3"
   },
   "devDependencies": {

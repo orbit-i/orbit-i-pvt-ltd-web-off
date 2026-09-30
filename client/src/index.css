@@ -58,7 +58,7 @@
 
   html {
     scroll-behavior: smooth;
-    color-scheme: dark;
+    color-scheme: light;
   }
 
   body {
@@ -75,8 +75,8 @@
   }
 
   ::selection {
-    background: var(--color-primary-600);
-    color: var(--color-text-primary);
+    background: #dbeafe;
+    color: #1e3a8a;
   }
 
   /* Visible keyboard focus everywhere — accessibility floor */

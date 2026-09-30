@@ -2,16 +2,15 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { Mail, MapPin, CheckCircle2 } from 'lucide-react'
+import { Mail, MapPin, CheckCircle2, Phone, Globe, MessageSquare } from 'lucide-react'
 import { getApiErrorMessage } from '@/utils/apiError'
 import { Card } from '@/components/ui/Card'
 import { Input } from '@/components/ui/Input'
 import { Button } from '@/components/ui'
-import { Badge } from '@/components/ui/Badge'
 import { contactService } from '@/services/contactService'
 import { SEO } from '@/components/seo/SEO'
 import { PAGE_SEO } from '@/config/seo'
-import { CONTACT_EMAIL } from '@/config/socialLinks'
+import { CONTACT_EMAIL, CONTACT_PHONE, WEBSITE_URL, WHATSAPP_CHANNEL_URL } from '@/config/socialLinks'
 import { OFFICE_LOCATION } from '@/config/companyInfo'
 
 const contactSchema = z.object({
@@ -46,24 +45,31 @@ export function ContactPage() {
   return (
     <div className="pb-24">
       <SEO {...PAGE_SEO.contact} />
-      <section className="border-b border-[var(--color-border)] py-20">
+      {/* Centered Page Header */}
+      <section className="border-b border-slate-200 bg-white py-16 sm:py-20">
         <div className="container-app">
-          <Badge tone="primary" className="mb-5">Contact</Badge>
-          <h1 className="max-w-2xl text-4xl font-semibold tracking-tight text-[var(--color-text-primary)] sm:text-5xl">
-            Let's talk about your project
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[var(--color-text-secondary)]">
-            Tell us a bit about what you're building. We reply to every message within one
-            business day.
-          </p>
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-blue-700 shadow-xs">
+              Direct Technical Consultation
+            </div>
+            <h1 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 leading-[1.15]">
+              Let's discuss your software roadmap
+            </h1>
+            <p className="mt-4 text-base sm:text-lg leading-relaxed text-slate-600 max-w-2xl mx-auto">
+              Tell us about what you are engineering. Our lead software architects review every message and reply within one business day.
+            </p>
+          </div>
         </div>
       </section>
 
       <section className="py-16">
         <div className="container-app grid gap-10 lg:grid-cols-[1fr_1.3fr]">
-          <div className="flex flex-col gap-6">
-            <ContactInfoRow icon={Mail} label="Email" value={CONTACT_EMAIL} />
-            <ContactInfoRow icon={MapPin} label="Office" value={OFFICE_LOCATION} />
+          <div className="flex flex-col gap-5">
+            <ContactInfoRow icon={Phone} label="Official Phone" value={CONTACT_PHONE} isLink href={`tel:${CONTACT_PHONE.replace(/\s+/g, '')}`} />
+            <ContactInfoRow icon={Mail} label="Official Email" value={CONTACT_EMAIL} isLink href={`mailto:${CONTACT_EMAIL}`} />
+            <ContactInfoRow icon={Globe} label="Website" value={WEBSITE_URL} isLink href={WEBSITE_URL} />
+            <ContactInfoRow icon={MessageSquare} label="WhatsApp Channel" value="Join Official Channel" isLink href={WHATSAPP_CHANNEL_URL} />
+            <ContactInfoRow icon={MapPin} label="Office Location" value={OFFICE_LOCATION} />
           </div>
 
           <Card hoverable={false}>
@@ -114,7 +120,19 @@ export function ContactPage() {
   )
 }
 
-function ContactInfoRow({ icon: Icon, label, value }: { icon: typeof Mail; label: string; value: string }) {
+function ContactInfoRow({
+  icon: Icon,
+  label,
+  value,
+  isLink,
+  href,
+}: {
+  icon: any
+  label: string
+  value: string
+  isLink?: boolean
+  href?: string
+}) {
   return (
     <div className="flex items-start gap-4">
       <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary-500/10 text-primary-300">
@@ -122,7 +140,18 @@ function ContactInfoRow({ icon: Icon, label, value }: { icon: typeof Mail; label
       </div>
       <div>
         <p className="text-xs text-[var(--color-text-muted)]">{label}</p>
-        <p className="text-sm font-medium text-[var(--color-text-primary)]">{value}</p>
+        {isLink && href ? (
+          <a
+            href={href}
+            target={href.startsWith('http') ? '_blank' : undefined}
+            rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+            className="text-sm font-medium text-[var(--color-text-primary)] hover:text-primary-400 hover:underline"
+          >
+            {value}
+          </a>
+        ) : (
+          <p className="text-sm font-medium text-[var(--color-text-primary)]">{value}</p>
+        )}
       </div>
     </div>
   )

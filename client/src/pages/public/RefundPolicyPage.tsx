@@ -2,76 +2,77 @@ import { LegalPageLayout } from '@/components/legal/LegalPageLayout'
 import { SEO } from '@/components/seo/SEO'
 import { PAGE_SEO } from '@/config/seo'
 import { CONTACT_EMAIL } from '@/config/socialLinks'
+import { PackageCheck, AlertCircle } from 'lucide-react'
 
 export function RefundPolicyPage() {
   return (
     <>
       <SEO {...PAGE_SEO.refundPolicy} />
-      <LegalPageLayout title="Refund Policy" lastUpdated="August 2026">
+      <LegalPageLayout
+        title="Refund Policy"
+        subtitle="Transparent terms covering digital software products, milestone disbursements, and custom enterprise engineering engagements."
+        lastUpdated="August 2026"
+      >
         <p>
-          This Refund Policy outlines how ORBIT-I Private Limited ("ORBIT-I") handles refunds for
-          digital products, subscriptions, and services. This is a policy template and should be
-          reviewed by the company or its legal advisor before publishing.
+          This Refund Policy outlines how ORBIT-I Private Limited ("ORBIT-I", "we", "us") handles refunds, cancellations, and milestone reconciliations for digital products, monthly retainers, and custom enterprise engineering projects.
         </p>
 
-        <h2>Overview</h2>
+        <h2 id="overview">1. Overview &amp; Service Classification</h2>
         <p>
-          ORBIT-I offers a mix of self-serve digital products and custom development/consulting
-          services. Refund eligibility differs by offering type, described below.
+          Because ORBIT-I delivers a distinct combination of pre-built self-serve digital products and dedicated senior software engineering capacity, refund parameters vary based on the service category:
         </p>
 
-        <h2>Eligibility for Refunds</h2>
-        <p>Refund eligibility depends on the type of purchase, how much of the service has already been delivered, and the terms agreed at the time of purchase.</p>
+        <h2 id="digital-products">2. Self-Serve Digital Software Products</h2>
+        <div className="my-5 rounded-xl border border-emerald-200 bg-emerald-50/70 p-5 text-emerald-950">
+          <div className="flex gap-3">
+            <PackageCheck className="size-5 shrink-0 text-emerald-700 mt-0.5" aria-hidden />
+            <div className="text-sm leading-relaxed">
+              <strong className="font-semibold text-emerald-900 block mb-1">Self-Serve Digital Products Window:</strong>
+              For standalone turnkey software packages (e.g. Orbit CRM, Orbit Forms), clients may request a refund within <strong>7 calendar days</strong> of initial license issuance, provided the license has not been permanently provisioned onto custom client servers or exceeded moderate evaluation thresholds.
+            </div>
+          </div>
+        </div>
 
-        <h2>Digital Products</h2>
-        <p>Digital product purchases (e.g. Orbit CRM, Orbit Forms) may be eligible for a refund if requested within a limited window of the initial purchase, subject to reasonable use.</p>
+        <h2 id="project-milestones">3. Custom Engineering &amp; Milestone Billing</h2>
+        <div className="my-5 rounded-xl border border-amber-200 bg-amber-50/70 p-5 text-amber-950">
+          <div className="flex gap-3">
+            <AlertCircle className="size-5 shrink-0 text-amber-600 mt-0.5" aria-hidden />
+            <div className="text-sm leading-relaxed">
+              <strong className="font-semibold text-amber-900 block mb-1">Non-Refundability of Completed Milestones:</strong>
+              Custom software engineering, cloud architecture, and UI/UX design involve committed allocation of senior software architects. Once a discovery deliverable or development sprint milestone has been reviewed, accepted, or deployed, the associated payment is <strong>strictly non-refundable</strong>.
+            </div>
+          </div>
+        </div>
 
-        <h2>Software Services</h2>
-        <p>Ongoing software services are billed for value delivered; fees for periods already rendered are generally non-refundable.</p>
-
-        <h2>Project-based services</h2>
-        <p>Custom development and consulting engagements are governed by the specific statement of work or agreement signed with the client, which takes precedence over this general policy. Because project work reserves people and capacity, payments for completed work, accepted milestones, discovery, and committed third-party costs are generally non-refundable.</p>
-
-        <h2>Discovery, planning, and design</h2>
-        <p>Discovery workshops, research, architecture, and design are delivered as scheduled. Once a session or deliverable has been supplied, its fee is non-refundable except where the applicable agreement says otherwise.</p>
-
-        <h2>Milestones and acceptance</h2>
-        <p>Where a project is billed by milestone, a refund request must identify the affected milestone and be made promptly after delivery. A client may request a correction for work that materially fails the agreed acceptance criteria; this is not a refund of unrelated completed milestones.</p>
-
-        <h2>Change requests and pauses</h2>
-        <p>Changes outside the agreed scope may require a new estimate. If a client pauses, delays, or cancels a project, ORBIT-I may invoice work performed, committed resources, and non-cancellable costs through the effective date.</p>
-
-        <h2>Ongoing maintenance and support</h2>
-        <p>Support retainers and maintenance subscriptions are billed for the period reserved. Cancellation stops future periods; fees for the current or already delivered period are not automatically refundable.</p>
-
-        <h2>Subscription &amp; Cancellation Terms</h2>
-        <p>Subscriptions can be cancelled at any time; cancellation stops future billing but does not automatically refund the current billing period unless otherwise agreed.</p>
-
-        <h2>Non-Refundable Services</h2>
-        <p>Work already completed, third-party costs already incurred on a client's behalf, and custom work delivered as specified are generally non-refundable.</p>
-
-        <h2>Refund Request Process</h2>
+        <h2 id="acceptance-and-corrections">4. Acceptance Criteria &amp; Bug Remediation</h2>
         <p>
-          To request a refund, contact us at{' '}
-          <a href={`mailto:${CONTACT_EMAIL}`} className="text-primary-400 hover:text-primary-300">
-            {CONTACT_EMAIL}
-          </a>{' '}
-          with your order or project details and the reason for the request.
+          If delivered code materially fails to satisfy the documented acceptance criteria defined in your Statement of Work (SOW), ORBIT-I will remediate the defects at no additional charge during the designated sprint acceptance window. Quality assurance corrections are prioritized to ensure specifications are fulfilled before proceeding to subsequent milestones.
         </p>
 
-        <h2>Processing Time</h2>
-        <p>Approved refunds are typically processed within a reasonable number of business days, depending on the original payment method.</p>
-
-        <h2>Exceptions</h2>
-        <p>Exceptions to this policy may be made at ORBIT-I's discretion on a case-by-case basis.</p>
-
-        <h2>Policy Changes</h2>
-        <p>This policy may be updated from time to time. Material changes will be reflected by updating the "Last updated" date above.</p>
-
-        <h2>Contact Information</h2>
+        <h2 id="retainers-and-support">5. Retainers &amp; Maintenance Subscriptions</h2>
         <p>
-          Questions about this policy can be sent to{' '}
-          <a href={`mailto:${CONTACT_EMAIL}`} className="text-primary-400 hover:text-primary-300">
+          Dedicated DevOps maintenance retainers, cloud monitoring agreements, and technical support plans reserve engineering availability for the billed calendar period. You may cancel your subscription at any time; cancellation halts subsequent renewal periods, while current active periods are not refunded.
+        </p>
+
+        <h2 id="refund-process">6. Refund Submission Process</h2>
+        <p>
+          To submit a formal refund or adjustment inquiry:
+        </p>
+        <ul>
+          <li>Email our finance team at <a href={`mailto:${CONTACT_EMAIL}`} className="text-blue-600 hover:text-blue-700 font-medium">{CONTACT_EMAIL}</a>.</li>
+          <li>Include your official <strong>Invoice Number (e.g. INV-2026-XXX)</strong> and organization name.</li>
+          <li>State the specific milestone, product license, or service scope under review and detailed justification.</li>
+        </ul>
+
+        <h2 id="processing-times">7. Processing &amp; Bank Reversal Times</h2>
+        <p>
+          Approved refund adjustments are processed within <strong>5 to 10 business days</strong>. Funds are refunded via the original payment rail (JazzCash, EasyPaisa, NayaPay, local bank IBAN wire, or Stripe), subject to banking clearing schedules.
+        </p>
+
+        <h2 id="contact-information">8. Inquiries &amp; Dispute Resolution</h2>
+        <p>
+          If you have questions regarding this policy or need clarification on a billing statement, please contact{' '}
+          <a href={`mailto:${CONTACT_EMAIL}`} className="text-blue-600 hover:text-blue-700 font-medium">
             {CONTACT_EMAIL}
           </a>
           .
@@ -80,3 +81,4 @@ export function RefundPolicyPage() {
     </>
   )
 }
+

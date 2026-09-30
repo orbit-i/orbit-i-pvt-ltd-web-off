@@ -10,7 +10,7 @@ export function DashboardHeader({ title, onMenuClick }: DashboardHeaderProps) {
   const { user } = useAuth()
 
   return (
-    <header className="sticky top-0 z-30 flex h-[var(--header-height)] items-center justify-between border-b border-[var(--color-border)] bg-[var(--color-background)]/90 px-5 backdrop-blur-lg lg:px-8">
+    <header className="sticky top-0 z-30 flex h-[var(--header-height)] items-center justify-between border-b border-[var(--color-border)] bg-[var(--color-surface)] px-5 shadow-[var(--shadow-sm)] lg:px-8">
       <div className="flex items-center gap-3">
         <button
           onClick={onMenuClick}
@@ -22,9 +22,9 @@ export function DashboardHeader({ title, onMenuClick }: DashboardHeaderProps) {
         <h1 className="text-lg font-semibold text-[var(--color-text-primary)]">{title}</h1>
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3">
         <button
-          className="relative flex size-9 items-center justify-center rounded-full border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
+          className="relative flex size-9 items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
           aria-label="Notifications"
         >
           <Bell className="size-4.5" aria-hidden />

@@ -1,18 +1,30 @@
 import { useState, type FormEvent } from 'react'
 import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
+import {
+  UserCircle,
+  ShieldCheck,
+  Lock,
+  Bell,
+  LifeBuoy,
+  Clock,
+  CheckCircle2,
+  ExternalLink,
+} from 'lucide-react'
 import { Card } from '@/components/ui/Card'
 import { Input } from '@/components/ui/Input'
 import { Button, Modal } from '@/components/ui'
 import { Badge } from '@/components/ui/Badge'
-import { EmptyState, ErrorState } from '@/components/ui/States'
+import { ErrorState } from '@/components/ui/States'
 import { PageLoader } from '@/components/ui/Loader'
 import { DataTable, type DataTableColumn } from '@/components/dashboard/DataTable'
 import { useAuth } from '@/contexts/AuthContext'
-import { formatCurrency, formatDate } from '@/utils/formatters'
+import { formatDate } from '@/utils/formatters'
 import { getApiErrorMessage } from '@/utils/apiError'
 import { supportService } from '@/services/supportService'
 import { useFetch } from '@/hooks/useFetch'
-import type { Invoice, SupportTicket } from '@/types'
+import { ROUTES } from '@/constants'
+import type { SupportTicket } from '@/types'
 
 export function ClientProfilePage() {
   const { user } = useAuth()
@@ -23,18 +35,102 @@ export function ClientProfilePage() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h2 className="font-display text-xl font-semibold text-[var(--color-text-primary)]">Profile</h2>
-        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Manage your account details.</p>
+        <h2 className="font-display text-xl font-bold text-slate-900">Client Account Profile</h2>
+        <p className="mt-1 text-sm text-slate-600">
+          Manage your verified contact details and enterprise credentials.
+        </p>
       </div>
-      <Card hoverable={false} className="max-w-lg">
-        <form onSubmit={handleSubmit(() => {})} className="flex flex-col gap-4">
-          <Input label="Full name" {...register('fullName')} />
-          <Input label="Email" type="email" disabled hint="Contact support to change your email address." {...register('email')} />
-          <Button type="submit" isLoading={isSubmitting} className="mt-2 self-start">
-            Save changes
-          </Button>
-        </form>
-      </Card>
+
+      <div className="grid gap-6 lg:grid-cols-3">
+        {/* Main Profile Form (2 cols) */}
+        <div className="lg:col-span-2">
+          <Card hoverable={false} className="p-6 bg-white border-slate-200 shadow-xs">
+            <div className="flex items-center gap-2 border-b border-slate-100 pb-4">
+              <UserCircle className="size-5 text-blue-600" aria-hidden />
+              <h3 className="font-semibold text-slate-900">Personal &amp; Company Details</h3>
+            </div>
+            <form onSubmit={handleSubmit(() => {})} className="mt-5 flex flex-col gap-4">
+              <div className="grid gap-4 sm:grid-cols-2">
+                <Input label="Full legal name" {...register('fullName')} />
+                <Input
+                  label="Official email address"
+                  type="email"
+                  disabled
+                  hint="Contact support to change primary billing email."
+                  {...register('email')}
+                />
+              </div>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <Input
+                  label="Designated organization"
+                  defaultValue="Enterprise Client"
+                  hint="Associated with your signed Statement of Work."
+                  disabled
+                />
+                <Input
+                  label="Registered jurisdiction"
+                  defaultValue="Islamic Republic of Pakistan"
+                  disabled
+                />
+              </div>
+              <div className="pt-2">
+                <Button type="submit" isLoading={isSubmitting} className="self-start">
+                  Save profile changes
+                </Button>
+              </div>
+            </form>
+          </Card>
+        </div>
+
+        {/* Security & Verification Status Card (1 col) */}
+        <div className="lg:col-span-1">
+          <Card hoverable={false} className="p-6 bg-white border-slate-200 shadow-xs flex flex-col justify-between h-full">
+            <div>
+              <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
+                <ShieldCheck className="size-4 text-emerald-600" aria-hidden />
+                <h3 className="text-sm font-semibold text-slate-900">Account Credentials</h3>
+              </div>
+              <div className="mt-4 space-y-3.5 text-xs text-slate-600">
+                <div className="flex items-center justify-between">
+                  <span className="text-slate-500">Account Tier</span>
+                  <Badge tone="success">Verified Enterprise Client</Badge>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-slate-500">Role Authority</span>
+                  <span className="font-medium text-slate-800">{user?.role ?? 'client'}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-slate-500">Security Standard</span>
+                  <span className="font-medium text-slate-800">TLS 1.3 / Bcrypt RBAC</span>
+                </div>
+                <div className="pt-3 border-t border-slate-100">
+                  <p className="font-medium text-slate-900 mb-1">Corporate Protection:</p>
+                  <p className="leading-relaxed">
+                    All source repositories and invoices are governed by ORBIT-I Private Limited under SECP regulations.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 pt-4 border-t border-slate-100 flex flex-col gap-2">
+              <Link
+                to={ROUTES.privacy}
+                className="text-xs font-medium text-blue-600 hover:underline flex items-center justify-between"
+              >
+                <span>Privacy &amp; Data Rights</span>
+                <ExternalLink className="size-3" />
+              </Link>
+              <Link
+                to={ROUTES.securityPolicy}
+                className="text-xs font-medium text-blue-600 hover:underline flex items-center justify-between"
+              >
+                <span>Security Safeguards</span>
+                <ExternalLink className="size-3" />
+              </Link>
+            </div>
+          </Card>
+        </div>
+      </div>
     </div>
   )
 }
@@ -42,35 +138,134 @@ export function ClientProfilePage() {
 export function ClientSettingsPage() {
   const [notifyEmail, setNotifyEmail] = useState(true)
   const [notifyProject, setNotifyProject] = useState(true)
+  const [notifyInvoices, setNotifyInvoices] = useState(true)
+  const [notifySecurity, setNotifySecurity] = useState(true)
 
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h2 className="font-display text-xl font-semibold text-[var(--color-text-primary)]">Settings</h2>
-        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Notification preferences for your account.</p>
+        <h2 className="font-display text-xl font-bold text-slate-900">Account Settings &amp; Preferences</h2>
+        <p className="mt-1 text-sm text-slate-600">
+          Control notification delivery, sprint alerts, and data preferences.
+        </p>
       </div>
-      <Card hoverable={false} className="max-w-lg divide-y divide-[var(--color-border)]">
-        <ToggleRow label="Email notifications" description="Receive order and project updates by email." checked={notifyEmail} onChange={setNotifyEmail} />
-        <ToggleRow label="Project milestone alerts" description="Get notified when a milestone is completed." checked={notifyProject} onChange={setNotifyProject} />
-      </Card>
+
+      <div className="grid gap-6 lg:grid-cols-3">
+        {/* Main Notification Settings (2 cols) */}
+        <div className="lg:col-span-2">
+          <Card hoverable={false} className="p-6 bg-white border-slate-200 shadow-xs">
+            <div className="flex items-center gap-2 border-b border-slate-100 pb-4">
+              <Bell className="size-5 text-blue-600" aria-hidden />
+              <h3 className="font-semibold text-slate-900">Communication &amp; Event Notifications</h3>
+            </div>
+            <div className="divide-y divide-slate-100">
+              <ToggleRow
+                label="Email notifications"
+                description="Receive order confirmations, sprint recaps, and weekly project digest."
+                checked={notifyEmail}
+                onChange={setNotifyEmail}
+              />
+              <ToggleRow
+                label="Project milestone alerts"
+                description="Instant alert when an engineering milestone is deployed for client review."
+                checked={notifyProject}
+                onChange={setNotifyProject}
+              />
+              <ToggleRow
+                label="Invoice &amp; payment receipts"
+                description="Automated digital invoice dispatch with FBR-compliant tax details."
+                checked={notifyInvoices}
+                onChange={setNotifyInvoices}
+              />
+              <ToggleRow
+                label="Critical security warnings"
+                description="Immediate alerts on new login locations, password resets, or system notices."
+                checked={notifySecurity}
+                onChange={setNotifySecurity}
+              />
+            </div>
+          </Card>
+        </div>
+
+        {/* Data Governance Card (1 col) */}
+        <div className="lg:col-span-1">
+          <Card hoverable={false} className="p-6 bg-white border-slate-200 shadow-xs flex flex-col justify-between h-full">
+            <div>
+              <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
+                <Lock className="size-4 text-blue-600" aria-hidden />
+                <h3 className="text-sm font-semibold text-slate-900">Data Governance</h3>
+              </div>
+              <div className="mt-4 space-y-3 text-xs leading-relaxed text-slate-600">
+                <p>
+                  ORBIT-I Private Limited enforces strict role segregation. Your code artifacts and billing records are stored in encrypted partitions.
+                </p>
+                <div className="pt-2 border-t border-slate-100 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-slate-500">Session Status</span>
+                    <Badge tone="success">Active (Secure)</Badge>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-slate-500">Data Location</span>
+                    <span className="font-medium text-slate-700">Encrypted Cloud DC</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 pt-4 border-t border-slate-100 flex flex-col gap-2">
+              <Link
+                to={ROUTES.terms}
+                className="text-xs font-medium text-blue-600 hover:underline flex items-center justify-between"
+              >
+                <span>Terms of Service</span>
+                <ExternalLink className="size-3" />
+              </Link>
+              <Link
+                to={ROUTES.privacy}
+                className="text-xs font-medium text-blue-600 hover:underline flex items-center justify-between"
+              >
+                <span>Privacy Statement</span>
+                <ExternalLink className="size-3" />
+              </Link>
+            </div>
+          </Card>
+        </div>
+      </div>
     </div>
   )
 }
 
-function ToggleRow({ label, description, checked, onChange }: { label: string; description: string; checked: boolean; onChange: (v: boolean) => void }) {
+function ToggleRow({
+  label,
+  description,
+  checked,
+  onChange,
+}: {
+  label: string
+  description: string
+  checked: boolean
+  onChange: (v: boolean) => void
+}) {
   return (
-    <div className="flex items-center justify-between py-4 first:pt-0 last:pb-0">
-      <div>
-        <p className="text-sm font-medium text-[var(--color-text-primary)]">{label}</p>
-        <p className="mt-0.5 text-xs text-[var(--color-text-secondary)]">{description}</p>
+    <div className="flex items-center justify-between py-4">
+      <div className="pr-4">
+        <p className="text-sm font-medium text-slate-900">{label}</p>
+        <p className="mt-0.5 text-xs text-slate-500 leading-relaxed">{description}</p>
       </div>
       <button
+        type="button"
         role="switch"
         aria-checked={checked}
         onClick={() => onChange(!checked)}
-        className={`relative h-6 w-11 shrink-0 rounded-full transition-colors ${checked ? 'bg-primary-600' : 'bg-white/10'}`}
+        className={`relative h-6 w-11 shrink-0 rounded-full transition-colors cursor-pointer ${
+          checked ? 'bg-blue-600' : 'bg-slate-200'
+        }`}
       >
-        <span className={`absolute top-0.5 size-5 rounded-full bg-white transition-transform ${checked ? 'translate-x-5.5' : 'translate-x-0.5'}`} />
+        <span
+          className={`absolute top-0.5 size-5 rounded-full bg-white shadow-xs transition-transform ${
+            checked ? 'translate-x-5.5' : 'translate-x-0.5'
+          }`}
+        />
       </button>
     </div>
   )
@@ -84,8 +279,8 @@ export function ClientSupportPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const columns: DataTableColumn<SupportTicket>[] = [
-    { header: 'Subject', render: (t) => t.subject },
-    { header: 'Status', render: (t) => <Badge tone="primary">{t.status}</Badge> },
+    { header: 'Subject', render: (t) => <span className="font-semibold text-slate-900">{t.subject}</span> },
+    { header: 'Status', render: (t) => <Badge tone={t.status === 'open' ? 'warning' : 'success'}>{t.status}</Badge> },
     { header: 'Opened', render: (t) => formatDate(t.createdAt) },
   ]
 
@@ -126,13 +321,49 @@ export function ClientSupportPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 className="font-display text-xl font-semibold text-[var(--color-text-primary)]">Support</h2>
-          <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Open a ticket if you need help with an order or project.</p>
+          <h2 className="font-display text-xl font-bold text-slate-900">Client Support &amp; Help Desk</h2>
+          <p className="mt-1 text-sm text-slate-600">
+            Open a dedicated ticket for urgent engineering escalations, bug reports, or project inquiries.
+          </p>
         </div>
-        <Button size="md" onClick={openModal}>New ticket</Button>
+        <Button size="md" onClick={openModal}>
+          Open New Ticket
+        </Button>
       </div>
+
+      {/* Support KPI Badges */}
+      <div className="grid gap-4 sm:grid-cols-3">
+        <Card hoverable={false} className="p-4 bg-white border-slate-200 shadow-xs flex items-center gap-3">
+          <div className="flex size-10 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
+            <LifeBuoy className="size-5" />
+          </div>
+          <div>
+            <p className="text-xs text-slate-500 font-medium">Tickets Active</p>
+            <p className="text-lg font-bold text-slate-900">{(tickets ?? []).length}</p>
+          </div>
+        </Card>
+        <Card hoverable={false} className="p-4 bg-white border-slate-200 shadow-xs flex items-center gap-3">
+          <div className="flex size-10 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+            <Clock className="size-5" />
+          </div>
+          <div>
+            <p className="text-xs text-slate-500 font-medium">Typical Response SLA</p>
+            <p className="text-lg font-bold text-slate-900">&lt; 4 Hours</p>
+          </div>
+        </Card>
+        <Card hoverable={false} className="p-4 bg-white border-slate-200 shadow-xs flex items-center gap-3">
+          <div className="flex size-10 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+            <CheckCircle2 className="size-5" />
+          </div>
+          <div>
+            <p className="text-xs text-slate-500 font-medium">Support Tier</p>
+            <p className="text-lg font-bold text-slate-900">Direct Senior Architect</p>
+          </div>
+        </Card>
+      </div>
+
       {isLoading ? (
         <PageLoader />
       ) : error ? (
@@ -142,68 +373,46 @@ export function ClientSupportPage() {
           columns={columns}
           rows={tickets ?? []}
           keyField={(t) => t.id}
-          emptyTitle="No support tickets"
-          emptyDescription="Open a ticket and our team will respond within one business day."
+          emptyTitle="No support tickets opened"
+          emptyDescription="Submit a ticket above and our engineering leads will assist you promptly."
         />
       )}
 
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="New support ticket">
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Open Engineering Support Ticket">
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <Input
             label="Subject"
             value={form.subject}
             onChange={(event) => setForm({ ...form, subject: event.target.value })}
-            placeholder="What do you need help with?"
+            placeholder="E.g., Production API webhook question, UI clarification"
           />
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="support-message" className="text-sm font-medium text-[var(--color-text-primary)]">
-              Message
+            <label htmlFor="support-message" className="text-sm font-medium text-slate-900">
+              Detailed Description
             </label>
             <textarea
               id="support-message"
               rows={5}
               value={form.message}
               onChange={(event) => setForm({ ...form, message: event.target.value })}
-              placeholder="Tell us how we can help."
-              className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-background-elevated)] px-3.5 py-2.5 text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)] focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/40"
+              placeholder="Provide exact reproduction steps, sprint milestone details, or error messages."
+              className="rounded-lg border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:outline-hidden focus:ring-2 focus:ring-blue-500/30"
             />
           </div>
-          {formError && <p className="text-sm text-[var(--color-danger)]">{formError}</p>}
-          <Button type="submit" isLoading={isSubmitting} className="mt-2">
-            Submit ticket
-          </Button>
+          {formError && <p className="text-sm text-red-600 font-medium">{formError}</p>}
+          <div className="flex justify-end gap-2 pt-2">
+            <Button type="button" variant="outline" onClick={() => setIsModalOpen(false)}>
+              Cancel
+            </Button>
+            <Button type="submit" isLoading={isSubmitting}>
+              Submit Ticket
+            </Button>
+          </div>
         </form>
       </Modal>
     </div>
   )
 }
 
-const MOCK_INVOICES: Invoice[] = []
+export { ClientInvoicesPage } from './ClientInvoicesPage'
 
-export function ClientInvoicesPage() {
-  const columns: DataTableColumn<Invoice>[] = [
-    { header: 'Invoice', render: (i) => `#${i.id}` },
-    { header: 'Amount', render: (i) => formatCurrency(i.amount, i.currency) },
-    { header: 'Status', render: (i) => <Badge tone={i.status === 'paid' ? 'success' : 'warning'}>{i.status}</Badge> },
-    { header: 'Date', render: (i) => formatDate(i.issuedAt) },
-  ]
-
-  if (MOCK_INVOICES.length === 0) {
-    return (
-      <div className="flex flex-col gap-6">
-        <div>
-          <h2 className="font-display text-xl font-semibold text-[var(--color-text-primary)]">Invoices</h2>
-          <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Billing history for your account.</p>
-        </div>
-        <EmptyState title="No invoices yet" description="Invoices for your orders and projects will appear here." />
-      </div>
-    )
-  }
-
-  return (
-    <div className="flex flex-col gap-6">
-      <h2 className="font-display text-xl font-semibold text-[var(--color-text-primary)]">Invoices</h2>
-      <DataTable columns={columns} rows={MOCK_INVOICES} keyField={(i) => i.id} />
-    </div>
-  )
-}

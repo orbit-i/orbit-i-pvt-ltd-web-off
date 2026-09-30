@@ -13,6 +13,10 @@ import {
   Star,
   UsersRound,
   Settings,
+  Award,
+  CreditCard,
+  Handshake,
+  Globe,
 } from 'lucide-react'
 import { DashboardSidebar, type SidebarNavItem } from '@/components/dashboard/DashboardSidebar'
 import { DashboardHeader } from '@/components/dashboard/DashboardHeader'
@@ -22,6 +26,12 @@ import { useAuth } from '@/contexts/AuthContext'
 const navItems: SidebarNavItem[] = [
   { label: 'Overview', to: ROUTES.adminDashboard, icon: LayoutDashboard, end: true },
   { label: 'Clients', to: ROUTES.adminClients, icon: Users },
+  { label: 'Interns', to: ROUTES.adminInterns, icon: Award },
+  { label: 'Payment Gateways', to: ROUTES.adminPaymentGateways, icon: CreditCard },
+  { label: 'Partners', to: ROUTES.adminPartners, icon: Handshake },
+  { label: 'CMS Pages', to: ROUTES.adminCmsPages, icon: Globe },
+  { label: 'Articles & Blog', to: ROUTES.adminBlog, icon: FileText },
+  { label: 'Corporate Team', to: ROUTES.adminTeam, icon: UsersRound },
   { label: 'Products', to: ROUTES.adminProducts, icon: Package },
   { label: 'Orders', to: ROUTES.adminOrders, icon: ShoppingCart },
   { label: 'Projects', to: ROUTES.adminProjects, icon: FolderKanban },
@@ -31,16 +41,18 @@ const navItems: SidebarNavItem[] = [
   { label: 'SEO Dashboard', to: ROUTES.adminSeoDashboard, icon: LayoutDashboard },
   { label: 'Support', to: ROUTES.adminSupport, icon: LifeBuoy },
   { label: 'Case Studies', to: ROUTES.adminCaseStudies, icon: FileText },
-  { label: 'Blog', to: ROUTES.adminBlog, icon: FileText },
   { label: 'Categories', to: ROUTES.adminCategories, icon: FolderKanban },
   { label: 'Tags', to: ROUTES.adminTags, icon: Star },
   { label: 'Testimonials', to: ROUTES.adminTestimonials, icon: Star },
-  { label: 'Team', to: ROUTES.adminTeam, icon: UsersRound },
   { label: 'Settings', to: ROUTES.adminSettings, icon: Settings },
 ]
 
 const titleByPath: Record<string, string> = {
   [ROUTES.adminDashboard]: 'Overview',
+  [ROUTES.adminInterns]: 'Interns Registry',
+  [ROUTES.adminPaymentGateways]: 'Payment Gateways & Banking',
+  [ROUTES.adminPartners]: 'Partners & Alliances',
+  [ROUTES.adminCmsPages]: 'CMS Content Pages',
   [ROUTES.adminSeoDashboard]: 'SEO Dashboard',
   [ROUTES.adminClients]: 'Clients',
   [ROUTES.adminProducts]: 'Products',
@@ -51,11 +63,11 @@ const titleByPath: Record<string, string> = {
   [ROUTES.adminLeads]: 'Leads',
   [ROUTES.adminSupport]: 'Support',
   [ROUTES.adminCaseStudies]: 'Case Studies',
-  [ROUTES.adminBlog]: 'Blog',
+  [ROUTES.adminBlog]: 'Articles & Blog (WordPress CMS)',
   [ROUTES.adminCategories]: 'Categories',
   [ROUTES.adminTags]: 'Tags',
   [ROUTES.adminTestimonials]: 'Testimonials',
-  [ROUTES.adminTeam]: 'Team',
+  [ROUTES.adminTeam]: 'Corporate Team',
   [ROUTES.adminSettings]: 'Settings',
 }
 
@@ -83,7 +95,7 @@ export function AdminDashboardLayout() {
       />
       <div className="flex flex-1 flex-col">
         <DashboardHeader title={titleByPath[pathname] ?? 'Admin'} onMenuClick={() => setIsSidebarOpen(true)} />
-        <main className="flex-1 px-5 py-6 lg:px-8 lg:py-8">
+        <main className="flex-1 px-4 py-6 sm:px-6 lg:px-8 lg:py-8 max-w-7xl mx-auto w-full">
           <Outlet />
         </main>
       </div>

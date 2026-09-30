@@ -2,26 +2,62 @@ import { LegalPageLayout } from '@/components/legal/LegalPageLayout'
 import { SEO } from '@/components/seo/SEO'
 import { PAGE_SEO } from '@/config/seo'
 import { CONTACT_EMAIL } from '@/config/socialLinks'
+import { AlertCircle } from 'lucide-react'
 
 export function WebsiteDisclaimerPage() {
   return (
     <>
       <SEO {...PAGE_SEO.disclaimer} />
-      <LegalPageLayout title="Website Disclaimer" lastUpdated="September 2026">
-        <p>The information on this website is provided by ORBIT-I Private Limited for general information and communication purposes. It is not legal, financial, tax, security, or professional advice.</p>
-        <h2>Accuracy and availability</h2>
-        <p>We aim to keep content accurate and current, but do not warrant that descriptions, prices, availability, or other information are complete, current, or error-free. Content and features may change or be unavailable without notice.</p>
-        <h2>No professional advice</h2>
-        <p>Website articles, examples, case studies, and estimates are illustrative. You should obtain advice suitable to your circumstances before relying on information or making a business, technical, or purchasing decision.</p>
-        <h2>Third-party links and services</h2>
-        <p>Links to third-party websites or services are provided for convenience. ORBIT-I does not control or endorse their content, availability, privacy practices, or security and is not responsible for losses arising from their use.</p>
-        <h2>Case studies and testimonials</h2>
-        <p>Results described in case studies and testimonials are examples of particular engagements and are not a promise or guarantee of comparable results. Outcomes depend on each client's circumstances and participation.</p>
-        <h2>Limitation of liability</h2>
-        <p>To the fullest extent permitted by law, ORBIT-I is not liable for indirect, incidental, special, or consequential loss arising from reliance on this website or its content. Any services we provide are governed by the applicable agreement or statement of work.</p>
-        <h2>Questions</h2>
-        <p>For clarification about this disclaimer, contact <a className="text-primary-400 hover:text-primary-300" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+      <LegalPageLayout
+        title="Website Disclaimer"
+        subtitle="General informational scope, professional advice disclaimer, and liability boundaries for ORBIT-I Private Limited."
+        lastUpdated="September 2026"
+      >
+        <p>
+          The information, technical articles, architecture overviews, and case studies published on this website are provided by ORBIT-I Private Limited ("ORBIT-I", "we", "us") for general informational, educational, and initial scoping purposes only.
+        </p>
+
+        <h2 id="no-professional-advice">1. No Professional Advice Statement</h2>
+        <div className="my-5 rounded-xl border border-amber-200 bg-amber-50/70 p-5 text-amber-950">
+          <div className="flex gap-3">
+            <AlertCircle className="size-5 shrink-0 text-amber-600 mt-0.5" aria-hidden />
+            <div className="text-sm leading-relaxed">
+              <strong className="font-semibold text-amber-900 block mb-1">Not Legal or Financial Advice:</strong>
+              Content presented on this site does not constitute formal legal, taxation, securities, or financial advice. Clients and visitors must consult licensed attorneys, registered tax advisors, or financial professionals appropriate to their specific enterprise jurisdiction before executing contractual or financial decisions.
+            </div>
+          </div>
+        </div>
+
+        <h2 id="accuracy-and-availability">2. Technical Accuracy &amp; Availability</h2>
+        <p>
+          While ORBIT-I strives to ensure the technical rigor and accuracy of descriptions, product features, and pricing structures on this website, technology stacks and software offerings change rapidly. We provide no guarantee that informational content is completely up-to-date, comprehensive, or free from typographical nuances. Service specifications may be altered without prior public announcement.
+        </p>
+
+        <h2 id="case-studies-and-metrics">3. Case Studies &amp; Performance Projections</h2>
+        <p>
+          Any case studies, client testimonials, benchmarks, or efficiency metrics cited on our website represent historical client engagements under specific conditions. They do not constitute an explicit warranty or guarantee of identical results for future software engagements. Final system performance depends upon architecture scopes, client team participation, and hosting environments.
+        </p>
+
+        <h2 id="external-links">4. Third-Party Links &amp; Integrations</h2>
+        <p>
+          Our platform may link to external APIs, documentation portals, or third-party cloud tools for illustrative convenience. ORBIT-I does not control or assume liability for the data governance, uptime, privacy practices, or content integrity of third-party platforms.
+        </p>
+
+        <h2 id="limitation-of-liability">5. Limitation of Liability</h2>
+        <p>
+          To the maximum extent permitted under applicable law, ORBIT-I Private Limited shall not be held liable for any direct, indirect, incidental, or consequential damages resulting from reliance on website materials. Formal commitments are strictly bounded by executed Statements of Work (SOWs).
+        </p>
+
+        <h2 id="questions">6. Clarifications &amp; Contact</h2>
+        <p>
+          For questions or formal clarifications regarding this disclaimer, please reach out to our legal liaison at{' '}
+          <a className="text-blue-600 underline font-medium hover:text-blue-700" href={`mailto:${CONTACT_EMAIL}`}>
+            {CONTACT_EMAIL}
+          </a>
+          .
+        </p>
       </LegalPageLayout>
     </>
   )
 }
+

@@ -13,10 +13,30 @@ import apiRouter from './routes/index'
 const app = express()
 
 // --- Security & core middleware -------------------------------------------------
-app.use(helmet())
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "'unsafe-inline'"],
+        styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
+        fontSrc: ["'self'", 'https://fonts.gstatic.com', 'data:'],
+        imgSrc: ["'self'", 'data:', 'blob:', 'https://images.unsplash.com', 'https://res.cloudinary.com', 'https://*.orbit-i.tech'],
+        connectSrc: ["'self'", 'http://localhost:*', 'https://orbit-i.tech', 'https://api.stripe.com'],
+        frameAncestors: ["'none'"],
+      },
+    },
+    crossOriginEmbedderPolicy: false,
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
+    hsts: { maxAge: 31536000, includeSubDomains: true, preload: true },
+    frameguard: { action: 'deny' },
+    noSniff: true,
+    referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
+  })
+)
 app.use(
   cors({
-    origin: env.clientUrl,
+    origin: [env.clientUrl, env.publicSiteUrl, 'https://orbit-i.tech', 'http://localhost:5173'],
     credentials: true,
   })
 )

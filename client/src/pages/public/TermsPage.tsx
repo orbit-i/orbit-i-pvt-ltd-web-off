@@ -2,75 +2,97 @@ import { LegalPageLayout } from '@/components/legal/LegalPageLayout'
 import { SEO } from '@/components/seo/SEO'
 import { PAGE_SEO } from '@/config/seo'
 import { CONTACT_EMAIL } from '@/config/socialLinks'
+import { Scale, FileCheck, ShieldAlert } from 'lucide-react'
 
 export function TermsPage() {
   return (
     <>
       <SEO {...PAGE_SEO.terms} />
-      <LegalPageLayout title="Terms & Conditions" lastUpdated="August 2026">
+      <LegalPageLayout
+        title="Terms & Conditions"
+        subtitle="Standard terms of engagement, contractual agreements, and platform usage conditions for ORBIT-I Private Limited."
+        lastUpdated="August 2026"
+      >
         <p>
-          These terms govern your use of the ORBIT-I Private Limited website and client platform.
-          This is a template and should be reviewed by qualified legal counsel before production use.
+          These Terms &amp; Conditions govern your access to and use of the website, client portal, software products, and consulting engagements provided by ORBIT-I Private Limited ("ORBIT-I", "we", "us"). Please review these terms carefully before engaging our services or registering an account.
         </p>
 
-        <h2>Introduction</h2>
-        <p>By accessing this website or creating an account, you agree to be bound by these Terms &amp; Conditions.</p>
-
-        <h2>Website Usage</h2>
-        <p>You agree to use this website only for lawful purposes and in a way that does not infringe the rights of, or restrict or inhibit the use of, this site by any third party.</p>
-
-        <h2>Services and project agreements</h2>
-        <p>ORBIT-I provides software development, consulting, and related digital products and services as described on this website. A signed proposal, order, statement of work, or project agreement may include scope, milestones, acceptance criteria, fees, ownership, and support terms; that agreement controls if it conflicts with this page.</p>
-
-        <h2>Accounts</h2>
+        <h2 id="introduction">1. Introduction &amp; Binding Agreement</h2>
         <p>
-          Client accounts are provided for the purpose of managing orders, projects, and support
-          requests with ORBIT-I. Accounts may not be shared or used for unauthorized access to other
-          users' data.
+          By accessing this website, creating a client account, placing an order, or executing a proposal or statement of work with ORBIT-I, you signify your full agreement to these terms. If you are entering into this agreement on behalf of a company or legal entity, you represent that you possess lawful authority to bind that entity.
         </p>
 
-        <h2>User Responsibilities</h2>
-        <p>You are responsible for maintaining the confidentiality of your account credentials and for all activity under your account.</p>
-
-        <h2>Intellectual Property</h2>
-        <p>All content on this website, including the ORBIT-I name, logo, and branding, is the property of ORBIT-I Private Limited unless otherwise stated.</p>
-
-        <h2>Payments</h2>
-        <p>Fees for products and services are as described at the time of purchase or in the applicable order/agreement. You are responsible for accurate billing details, applicable taxes, and fees charged by your bank or payment provider.</p>
-
-        <h2>Orders</h2>
+        <h2 id="website-usage">2. Acceptable Platform Usage</h2>
         <p>
-          Specific commercial terms for products and services are governed by the individual order or
-          statement of work agreed with ORBIT-I, not by this page alone.
+          You agree to utilize our website, client platform, and API infrastructure exclusively for legitimate commercial and project management purposes. You agree not to:
+        </p>
+        <ul>
+          <li>Probe, scan, or reverse engineer platform security safeguards or API endpoints without written consent.</li>
+          <li>Introduce malicious scripts, automated crawlers with abusive throughput, or denial-of-service traffic.</li>
+          <li>Misrepresent your identity, impersonate another entity, or attempt unauthorized access to other clients' data.</li>
+        </ul>
+
+        <h2 id="services-agreements">3. Services, Milestones &amp; SOWs</h2>
+        <div className="my-5 rounded-xl border border-blue-200 bg-blue-50/70 p-5 text-slate-800">
+          <div className="flex gap-3">
+            <FileCheck className="size-5 shrink-0 text-blue-700 mt-0.5" aria-hidden />
+            <div className="text-sm leading-relaxed">
+              <strong className="font-semibold text-slate-900 block mb-1">Contractual Precedence:</strong>
+              ORBIT-I provides custom enterprise software engineering, cloud architecture, and product development under formal Statements of Work (SOW) or signed Service Agreements. Where a signed agreement contains terms that directly conflict with these general terms, the provisions of the signed agreement shall prevail.
+            </div>
+          </div>
+        </div>
+
+        <h2 id="client-accounts">4. Client Accounts &amp; Access Controls</h2>
+        <p>
+          Client portal accounts are granted specifically for tracking sprint progress, managing verified invoices, reviewing source milestones, and raising support tickets. You are solely responsible for maintaining strong credential security and for all actions undertaken under your authenticated credentials.
         </p>
 
-        <h2>Third-Party Services</h2>
-        <p>This site or our services may link to or integrate with third-party services that are governed by their own terms.</p>
-
-        <h2>Limitation of Liability</h2>
-        <p>To the fullest extent permitted by law, ORBIT-I is not liable for indirect, incidental, or consequential damages arising from use of this website or our services.</p>
-
-        <h2>Disclaimer</h2>
-        <p>This website and its content are provided "as is" without warranties of any kind, express or implied.</p>
-
-        <h2>Termination</h2>
-        <p>ORBIT-I may suspend or terminate account access for violation of these terms or for misuse of the platform.</p>
-
-        <h2>Changes to Terms</h2>
-        <p>These terms may be updated from time to time. Continued use of the site after changes constitutes acceptance of the updated terms.</p>
-
-        <h2>Governing Law</h2>
-        <p>These terms are governed by the laws of the Islamic Republic of Pakistan. Subject to any mandatory consumer protection rights, the courts of Pakistan having jurisdiction over ORBIT-I Private Limited's registered office will have exclusive jurisdiction over disputes.</p>
-
-        <h2>Contact Information</h2>
+        <h2 id="intellectual-property">5. Intellectual Property Rights</h2>
         <p>
-          Questions about these terms can be sent to{' '}
-          <a href={`mailto:${CONTACT_EMAIL}`} className="text-primary-400 hover:text-primary-300">
+          All trademarks, corporate marks, site copy, graphics, and proprietary software frameworks showcased on this public website remain the exclusive intellectual property of ORBIT-I Private Limited.
+        </p>
+        <p>
+          For custom client engagements, ownership of custom-developed codebase and deliverables transitions to the client upon full settlement of contractually agreed milestone invoices, subject to third-party open-source license agreements.
+        </p>
+
+        <h2 id="payments">6. Fees, Invoicing &amp; Taxes</h2>
+        <p>
+          Fees for digital products and engineering milestones are invoiced in PKR, USD, or mutually agreed currencies. Clients are responsible for applicable sales tax, withholding deductions where applicable with valid tax exemption certificates, and banking intermediary fees.
+        </p>
+
+        <h2 id="limitation-of-liability">7. Limitation of Liability</h2>
+        <div className="my-5 rounded-xl border border-slate-200 bg-slate-100/70 p-5 text-slate-800">
+          <div className="flex gap-3">
+            <ShieldAlert className="size-5 shrink-0 text-slate-600 mt-0.5" aria-hidden />
+            <div className="text-sm leading-relaxed">
+              <strong className="font-semibold text-slate-900 block mb-1">Liability Disclaimer:</strong>
+              To the maximum extent permitted by applicable law, ORBIT-I Private Limited and its directors, engineers, and affiliates shall not be liable for indirect, punitive, or consequential damages, loss of revenue, or operational downtime arising from website usage or external cloud provider interruptions.
+            </div>
+          </div>
+        </div>
+
+        <h2 id="governing-law">8. Governing Law &amp; Jurisdiction</h2>
+        <div className="my-5 rounded-xl border border-indigo-200 bg-indigo-50/70 p-5 text-indigo-950">
+          <div className="flex gap-3">
+            <Scale className="size-5 shrink-0 text-indigo-700 mt-0.5" aria-hidden />
+            <div className="text-sm leading-relaxed">
+              <strong className="font-semibold text-indigo-950 block mb-1">Statutory Jurisdiction:</strong>
+              These Terms &amp; Conditions are governed by and construed in accordance with the laws of the <strong>Islamic Republic of Pakistan</strong>. Any legal dispute or proceeding arising out of or in connection with these terms shall fall under the exclusive jurisdiction of the competent courts of Islamabad, Pakistan.
+            </div>
+          </div>
+        </div>
+
+        <h2 id="contact-information">9. Legal Questions &amp; Notices</h2>
+        <p>
+          Official legal notices or inquiries regarding contract execution may be served electronically to{' '}
+          <a href={`mailto:${CONTACT_EMAIL}`} className="text-blue-600 hover:text-blue-700 font-medium">
             {CONTACT_EMAIL}
-          </a>
-          .
+          </a>{' '}
+          or addressed to our registered office in Islamabad, Pakistan.
         </p>
       </LegalPageLayout>
     </>
   )
 }
+

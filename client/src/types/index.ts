@@ -138,6 +138,7 @@ export interface BlogPost {
   excerpt: string
   content: string
   coverImage?: string
+  featuredImage?: string
   category: Category
   tags: Tag[]
   author: Pick<User, 'id' | 'fullName'>
@@ -209,11 +210,14 @@ export interface TeamMember {
   id: string
   name: string
   designation: string
+  department?: string
   bio: string
   avatarUrl?: string
   linkedinUrl?: string
+  githubUrl?: string
   skills: string[]
   order: number
+  isPublished?: boolean
 }
 
 export interface ContactSubmission {

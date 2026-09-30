@@ -31,16 +31,20 @@ export function CareersPage() {
   return (
     <div className="pb-24">
       <SEO {...PAGE_SEO.careers} />
-      <section className="border-b border-[var(--color-border)] py-20">
+      {/* Centered Page Header */}
+      <section className="border-b border-slate-200 bg-white py-16 sm:py-20">
         <div className="container-app">
-          <Badge tone="primary" className="mb-5">Careers</Badge>
-          <h1 className="max-w-2xl text-4xl font-semibold tracking-tight text-[var(--color-text-primary)] sm:text-5xl">
-            Work on software that ships
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[var(--color-text-secondary)]">
-            We're a small, remote-friendly team. Open roles are below — if nothing fits, we're
-            always open to hearing from strong engineers and designers.
-          </p>
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-blue-700 shadow-xs">
+              Engineering Careers &amp; Traineeships
+            </div>
+            <h1 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 leading-[1.15]">
+              Build software that actually ships
+            </h1>
+            <p className="mt-4 text-base sm:text-lg leading-relaxed text-slate-600 max-w-2xl mx-auto">
+              We are a disciplined engineering team that values code clarity, system architecture, and real ownership. Explore our open positions below.
+            </p>
+          </div>
         </div>
       </section>
 

@@ -1,13 +1,13 @@
 import { Link, useParams } from 'react-router-dom'
-import { ArrowRight, Check, Code2, Smartphone, Wrench, PenTool, Cloud, Sparkles } from 'lucide-react'
+import { ArrowRight, CheckCircle2, Code2, Smartphone, Wrench, PenTool, Cloud, Sparkles, ArrowLeft } from 'lucide-react'
 import { Card } from '@/components/ui/Card'
-import { Badge } from '@/components/ui/Badge'
 import { LinkButton } from '@/components/ui'
 import { PageLoader } from '@/components/ui/Loader'
 import { EmptyState, ErrorState } from '@/components/ui/States'
 import { ROUTES } from '@/constants'
 import { serviceContentService } from '@/services/contentService'
 import { useFetch } from '@/hooks/useFetch'
+import { SEO } from '@/components/seo/SEO'
 
 const serviceIcons: Record<string, typeof Code2> = { Code2, Smartphone, Wrench, PenTool, Cloud, Sparkles }
 
@@ -36,70 +36,97 @@ export function ServiceDetailPage() {
 
   return (
     <div className="pb-24">
-      <section className="border-b border-[var(--color-border)] py-20">
+      <SEO
+        title={`${service.title} — Engineering Capabilities | ORBIT-I`}
+        description={service.summary}
+        path={ROUTES.serviceDetail(service.slug)}
+      />
+
+      {/* Centered Page Header */}
+      <section className="border-b border-slate-200 bg-white py-16 sm:py-20">
         <div className="container-app">
-          <Link to={ROUTES.services} className="text-sm text-[var(--color-text-secondary)] hover:text-primary-300">
-            ← All services
-          </Link>
-          <div className="mt-5 flex size-14 items-center justify-center rounded-[var(--radius-lg)] bg-primary-500/10 text-primary-300">
-            <Icon className="size-6" aria-hidden />
-          </div>
-          <h1 className="mt-6 max-w-2xl text-4xl font-semibold tracking-tight text-[var(--color-text-primary)] sm:text-5xl">
-            {service.title}
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[var(--color-text-secondary)]">
-            {service.description}
-          </p>
-          <div className="mt-8 flex flex-wrap gap-2">
-            {service.technologies.map((tech) => (
-              <Badge key={tech} tone="neutral">{tech}</Badge>
-            ))}
+          <div className="mx-auto max-w-3xl text-center">
+            <Link to={ROUTES.services} className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 hover:text-blue-700 mb-6">
+              <ArrowLeft className="size-4" /> Back to All Services
+            </Link>
+
+            <div className="flex justify-center">
+              <div className="flex size-14 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 shadow-xs border border-blue-100">
+                <Icon className="size-7" aria-hidden />
+              </div>
+            </div>
+
+            <h1 className="mt-5 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 leading-[1.15]">
+              {service.title}
+            </h1>
+
+            <p className="mt-4 text-base sm:text-lg leading-relaxed text-slate-600 max-w-2xl mx-auto">
+              {service.description}
+            </p>
+
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
+              {service.technologies.map((tech) => (
+                <span key={tech} className="rounded-full border border-slate-200 bg-slate-50 px-3.5 py-1 text-xs font-semibold text-slate-700">
+                  {tech}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="border-b border-[var(--color-border)] py-16">
-        <div className="container-app grid gap-10 lg:grid-cols-2">
-          <div>
-            <h2 className="text-2xl font-semibold text-[var(--color-text-primary)]">Benefits</h2>
-            <ul className="mt-6 flex flex-col gap-4">
+      {/* Benefits & Process Grid */}
+      <section className="border-b border-slate-200 bg-slate-50/60 py-16 lg:py-20">
+        <div className="container-app grid gap-8 lg:grid-cols-2">
+          {/* Key Advantages */}
+          <Card hoverable={false} className="p-8 bg-white border-slate-200 shadow-xs">
+            <h2 className="text-xl font-bold text-slate-900">Key Engineering Advantages</h2>
+            <div className="mt-6 flex flex-col gap-4">
               {service.benefits.map((benefit) => (
-                <li key={benefit} className="flex items-start gap-3 text-sm text-[var(--color-text-secondary)]">
-                  <Check className="mt-0.5 size-4 shrink-0 text-primary-400" aria-hidden />
-                  {benefit}
-                </li>
+                <div key={benefit} className="flex items-start gap-3 rounded-lg border border-slate-100 bg-slate-50/50 p-3.5">
+                  <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-emerald-600" aria-hidden />
+                  <span className="text-sm font-medium text-slate-800 leading-relaxed">{benefit}</span>
+                </div>
               ))}
-            </ul>
-          </div>
-          <div>
-            <h2 className="text-2xl font-semibold text-[var(--color-text-primary)]">Our process</h2>
-            <ol className="mt-6 flex flex-col gap-5">
+            </div>
+          </Card>
+
+          {/* Delivery Process */}
+          <Card hoverable={false} className="p-8 bg-white border-slate-200 shadow-xs">
+            <h2 className="text-xl font-bold text-slate-900">Our Implementation Lifecycle</h2>
+            <div className="mt-6 flex flex-col gap-5">
               {service.processSteps.map((step, index) => (
-                <li key={step.title} className="flex gap-4">
-                  <span className="flex size-8 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-strong)] font-display text-xs font-semibold text-primary-300">
+                <div key={step.title} className="flex items-start gap-4">
+                  <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-blue-50 font-display text-xs font-bold text-blue-600">
                     {String(index + 1).padStart(2, '0')}
                   </span>
                   <div>
-                    <p className="font-medium text-[var(--color-text-primary)]">{step.title}</p>
-                    <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{step.description}</p>
+                    <p className="text-base font-bold text-slate-900">{step.title}</p>
+                    <p className="mt-1 text-sm text-slate-600 leading-relaxed">{step.description}</p>
                   </div>
-                </li>
+                </div>
               ))}
-            </ol>
-          </div>
+            </div>
+          </Card>
         </div>
       </section>
 
-      <section className="py-16">
+      {/* CTA Banner */}
+      <section className="py-16 text-center">
         <div className="container-app">
-          <Card hoverable={false} className="flex flex-col items-center gap-5 py-14 text-center">
-            <h2 className="text-2xl font-semibold text-[var(--color-text-primary)]">
-              Ready to talk about your {service.title.toLowerCase()} project?
+          <div className="rounded-2xl border border-blue-200 bg-gradient-to-b from-blue-50/50 to-white p-10 sm:p-14 text-center shadow-xs max-w-3xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
+              Ready to architect your {service.title.toLowerCase()} system?
             </h2>
-            <LinkButton to={ROUTES.contact} size="lg">
-              Start a conversation <ArrowRight className="size-4" aria-hidden />
-            </LinkButton>
-          </Card>
+            <p className="mt-3 text-base text-slate-600 max-w-lg mx-auto">
+              Schedule a technical conversation with our software architects today.
+            </p>
+            <div className="mt-6">
+              <LinkButton to={ROUTES.contact} size="lg" className="shadow-md">
+                Initiate Project Consultation <ArrowRight className="size-4" aria-hidden />
+              </LinkButton>
+            </div>
+          </div>
         </div>
       </section>
     </div>

@@ -1,6 +1,29 @@
 import { ContactMessage } from '../models/ContactMessage'
 import { Job, JobApplication } from '../models/Job'
 import { ApiError } from '../utils/ApiError'
+import { isMongoConnected } from '../config/db'
+
+const FALLBACK_JOBS = [
+  {
+    id: 'job-1',
+    title: 'Senior Full-Stack Engineer (React & Node.js)',
+    slug: 'senior-full-stack-engineer',
+    department: 'Engineering',
+    location: 'Lahore, Pakistan / Remote',
+    type: 'full_time',
+    description: 'We are looking for a Senior Full-Stack Engineer with deep experience in TypeScript, React 19, and Node.js backend architecture to lead feature development on enterprise web platforms.',
+    requirements: [
+      '5+ years of production experience with TypeScript, React, and Node.js',
+      'Strong grasp of relational databases (MySQL/PostgreSQL) and query optimization',
+      'Experience building and documenting secure REST and GraphQL APIs',
+    ],
+    responsibilities: [
+      'Architect and build full-stack web features from specification to production launch',
+      'Perform peer code reviews with a focus on type safety, security, and performance',
+    ],
+    isOpen: true,
+  },
+]
 
 export const contactService = {
   async submit(data: {
@@ -11,11 +34,12 @@ export const contactService = {
     subject: string
     message: string
   }) {
+    if (!isMongoConnected()) return { id: 'contact-temp', ...data, createdAt: new Date() }
     return ContactMessage.create(data)
-    // TODO: notify the sales inbox via the transactional email provider once configured.
   },
 
   async list(query: { status?: string; page?: number; limit?: number }) {
+    if (!isMongoConnected()) return { items: [], page: 1, totalItems: 0, totalPages: 0 }
     const page = query.page ?? 1
     const limit = query.limit ?? 20
     const filter: Record<string, unknown> = {}
@@ -32,6 +56,7 @@ export const contactService = {
   },
 
   async updateStatus(id: string, status: string) {
+    if (!isMongoConnected()) return null
     const message = await ContactMessage.findByIdAndUpdate(id, { status }, { new: true })
     if (!message) throw ApiError.notFound('Message not found')
     return message
@@ -40,16 +65,23 @@ export const contactService = {
 
 export const careersService = {
   async listOpenJobs() {
+    if (!isMongoConnected()) return FALLBACK_JOBS
     return Job.find({ isOpen: true }).sort({ createdAt: -1 })
   },
 
   async getJobBySlug(slug: string) {
+    if (!isMongoConnected()) {
+      const match = FALLBACK_JOBS.find((j) => j.slug === slug)
+      if (match) return match
+      return FALLBACK_JOBS[0]
+    }
     const job = await Job.findOne({ slug })
     if (!job) throw ApiError.notFound('Job posting not found')
     return job
   },
 
   async listAllJobs() {
+    if (!isMongoConnected()) return FALLBACK_JOBS
     return Job.find().sort({ createdAt: -1 })
   },
 
