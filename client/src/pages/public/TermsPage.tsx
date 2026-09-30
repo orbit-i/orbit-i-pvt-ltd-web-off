@@ -2,7 +2,6 @@ import { LegalPageLayout } from '@/components/legal/LegalPageLayout'
 import { SEO } from '@/components/seo/SEO'
 import { PAGE_SEO } from '@/config/seo'
 import { CONTACT_EMAIL } from '@/config/socialLinks'
-import { Scale, FileCheck, ShieldAlert } from 'lucide-react'
 
 export function TermsPage() {
   return (
@@ -17,12 +16,12 @@ export function TermsPage() {
           These Terms &amp; Conditions govern your access to and use of the website, client portal, software products, and consulting engagements provided by ORBIT-I Private Limited ("ORBIT-I", "we", "us"). Please review these terms carefully before engaging our services or registering an account.
         </p>
 
-        <h2 id="introduction">1. Introduction &amp; Binding Agreement</h2>
+        <h2>1. Introduction &amp; Binding Agreement</h2>
         <p>
           By accessing this website, creating a client account, placing an order, or executing a proposal or statement of work with ORBIT-I, you signify your full agreement to these terms. If you are entering into this agreement on behalf of a company or legal entity, you represent that you possess lawful authority to bind that entity.
         </p>
 
-        <h2 id="website-usage">2. Acceptable Platform Usage</h2>
+        <h2>2. Acceptable Platform Usage</h2>
         <p>
           You agree to utilize our website, client platform, and API infrastructure exclusively for legitimate commercial and project management purposes. You agree not to:
         </p>
@@ -32,23 +31,17 @@ export function TermsPage() {
           <li>Misrepresent your identity, impersonate another entity, or attempt unauthorized access to other clients' data.</li>
         </ul>
 
-        <h2 id="services-agreements">3. Services, Milestones &amp; SOWs</h2>
-        <div className="my-5 rounded-xl border border-blue-200 bg-blue-50/70 p-5 text-slate-800">
-          <div className="flex gap-3">
-            <FileCheck className="size-5 shrink-0 text-blue-700 mt-0.5" aria-hidden />
-            <div className="text-sm leading-relaxed">
-              <strong className="font-semibold text-slate-900 block mb-1">Contractual Precedence:</strong>
-              ORBIT-I provides custom enterprise software engineering, cloud architecture, and product development under formal Statements of Work (SOW) or signed Service Agreements. Where a signed agreement contains terms that directly conflict with these general terms, the provisions of the signed agreement shall prevail.
-            </div>
-          </div>
-        </div>
+        <h2>3. Services, Milestones &amp; SOWs</h2>
+        <p>
+          <strong>Contractual Precedence:</strong> ORBIT-I provides custom enterprise software engineering, cloud architecture, and product development under formal Statements of Work (SOW) or signed Service Agreements. Where a signed agreement contains terms that directly conflict with these general terms, the provisions of the signed agreement shall prevail.
+        </p>
 
-        <h2 id="client-accounts">4. Client Accounts &amp; Access Controls</h2>
+        <h2>4. Client Accounts &amp; Access Controls</h2>
         <p>
           Client portal accounts are granted specifically for tracking sprint progress, managing verified invoices, reviewing source milestones, and raising support tickets. You are solely responsible for maintaining strong credential security and for all actions undertaken under your authenticated credentials.
         </p>
 
-        <h2 id="intellectual-property">5. Intellectual Property Rights</h2>
+        <h2>5. Intellectual Property Rights</h2>
         <p>
           All trademarks, corporate marks, site copy, graphics, and proprietary software frameworks showcased on this public website remain the exclusive intellectual property of ORBIT-I Private Limited.
         </p>
@@ -56,43 +49,30 @@ export function TermsPage() {
           For custom client engagements, ownership of custom-developed codebase and deliverables transitions to the client upon full settlement of contractually agreed milestone invoices, subject to third-party open-source license agreements.
         </p>
 
-        <h2 id="payments">6. Fees, Invoicing &amp; Taxes</h2>
+        <h2>6. Fees, Invoicing &amp; Taxes</h2>
         <p>
           Fees for digital products and engineering milestones are invoiced in PKR, USD, or mutually agreed currencies. Clients are responsible for applicable sales tax, withholding deductions where applicable with valid tax exemption certificates, and banking intermediary fees.
         </p>
 
-        <h2 id="limitation-of-liability">7. Limitation of Liability</h2>
-        <div className="my-5 rounded-xl border border-slate-200 bg-slate-100/70 p-5 text-slate-800">
-          <div className="flex gap-3">
-            <ShieldAlert className="size-5 shrink-0 text-slate-600 mt-0.5" aria-hidden />
-            <div className="text-sm leading-relaxed">
-              <strong className="font-semibold text-slate-900 block mb-1">Liability Disclaimer:</strong>
-              To the maximum extent permitted by applicable law, ORBIT-I Private Limited and its directors, engineers, and affiliates shall not be liable for indirect, punitive, or consequential damages, loss of revenue, or operational downtime arising from website usage or external cloud provider interruptions.
-            </div>
-          </div>
-        </div>
+        <h2>7. Limitation of Liability</h2>
+        <p>
+          <strong>Liability Disclaimer:</strong> To the maximum extent permitted by applicable law, ORBIT-I Private Limited and its directors, engineers, and affiliates shall not be liable for indirect, punitive, or consequential damages, loss of revenue, or operational downtime arising from website usage or external cloud provider interruptions.
+        </p>
 
-        <h2 id="governing-law">8. Governing Law &amp; Jurisdiction</h2>
-        <div className="my-5 rounded-xl border border-indigo-200 bg-indigo-50/70 p-5 text-indigo-950">
-          <div className="flex gap-3">
-            <Scale className="size-5 shrink-0 text-indigo-700 mt-0.5" aria-hidden />
-            <div className="text-sm leading-relaxed">
-              <strong className="font-semibold text-indigo-950 block mb-1">Statutory Jurisdiction:</strong>
-              These Terms &amp; Conditions are governed by and construed in accordance with the laws of the <strong>Islamic Republic of Pakistan</strong>. Any legal dispute or proceeding arising out of or in connection with these terms shall fall under the exclusive jurisdiction of the competent courts of Islamabad, Pakistan.
-            </div>
-          </div>
-        </div>
+        <h2>8. Governing Law &amp; Jurisdiction</h2>
+        <p>
+          <strong>Statutory Jurisdiction:</strong> These Terms &amp; Conditions are governed by and construed in accordance with the laws of the <strong>Islamic Republic of Pakistan</strong>. Any legal dispute or proceeding arising out of or in connection with these terms shall fall under the exclusive jurisdiction of the competent courts of Islamabad, Pakistan.
+        </p>
 
-        <h2 id="contact-information">9. Legal Questions &amp; Notices</h2>
+        <h2>9. Legal Questions &amp; Notices</h2>
         <p>
           Official legal notices or inquiries regarding contract execution may be served electronically to{' '}
-          <a href={`mailto:${CONTACT_EMAIL}`} className="text-blue-600 hover:text-blue-700 font-medium">
+          <a href={`mailto:${CONTACT_EMAIL}`}>
             {CONTACT_EMAIL}
           </a>{' '}
-          or addressed to our registered office in Islamabad, Pakistan.
+          or addressed to our registered corporate office.
         </p>
       </LegalPageLayout>
     </>
   )
 }
-

@@ -47,7 +47,14 @@ apiClient.interceptors.response.use(
       return Promise.reject(error)
     }
 
-    if (originalRequest.url?.includes('/auth/refresh')) {
+    // Do NOT attempt token refresh on authentication endpoints or refresh itself
+    if (
+      originalRequest.url?.includes('/auth/login') ||
+      originalRequest.url?.includes('/auth/register') ||
+      originalRequest.url?.includes('/auth/forgot-password') ||
+      originalRequest.url?.includes('/auth/reset-password') ||
+      originalRequest.url?.includes('/auth/refresh')
+    ) {
       return Promise.reject(error)
     }
 
@@ -78,11 +85,12 @@ apiClient.interceptors.response.use(
         return apiClient(originalRequest)
       }
       return Promise.reject(error)
-    } catch (refreshError) {
+    } catch {
       pendingQueue.forEach((resolve) => resolve(null))
       pendingQueue = []
       setAccessToken(null)
-      return Promise.reject(refreshError)
+      // Reject with the ORIGINAL error so the caller sees the true reason (e.g. Invalid email/password)
+      return Promise.reject(error)
     } finally {
       isRefreshing = false
     }

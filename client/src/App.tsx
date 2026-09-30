@@ -98,13 +98,12 @@ function App() {
               <Route path={ROUTES.register} element={<GuestOnlyRoute><RegisterPage /></GuestOnlyRoute>} />
               <Route path={ROUTES.forgotPassword} element={<GuestOnlyRoute><ForgotPasswordPage /></GuestOnlyRoute>} />
               <Route path={ROUTES.resetPassword} element={<GuestOnlyRoute><ResetPasswordPage /></GuestOnlyRoute>} />
-
-              <Route path="*" element={<NotFoundPage />} />
             </Route>
 
             {/* Standalone Secret Admin & SuperAdmin Security Gate */}
             <Route path={ROUTES.adminLogin} element={<AdminLoginPage />} />
             <Route path="/admin-gate" element={<AdminLoginPage />} />
+            <Route path="/admin/login" element={<AdminLoginPage />} />
 
             {/* Client dashboard */}
             <Route
@@ -164,6 +163,9 @@ function App() {
               <Route path={ROUTES.adminCategories} element={<AdminCategoriesPage />} />
               <Route path={ROUTES.adminTags} element={<AdminTagsPage />} />
             </Route>
+
+            {/* Global catch-all 404 handler */}
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>

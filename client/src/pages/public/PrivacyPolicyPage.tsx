@@ -2,7 +2,6 @@ import { LegalPageLayout } from '@/components/legal/LegalPageLayout'
 import { SEO } from '@/components/seo/SEO'
 import { PAGE_SEO } from '@/config/seo'
 import { CONTACT_EMAIL } from '@/config/socialLinks'
-import { AlertTriangle, Building2 } from 'lucide-react'
 
 export function PrivacyPolicyPage() {
   return (
@@ -14,22 +13,20 @@ export function PrivacyPolicyPage() {
         lastUpdated="August 2026"
       >
         <p>
-          ORBIT-I Private Limited ("ORBIT-I", "we", "us") respects your privacy. This policy describes,
-          in transparent terms, the categories of information we collect through this website, client portal,
-          and software services, and how we handle and protect that data in compliance with applicable law.
+          ORBIT-I Private Limited ("ORBIT-I", "we", "us") respects your privacy. This policy describes, in transparent terms, the categories of information we collect through this website, client portal, and software services, and how we handle and protect that data in compliance with applicable law.
         </p>
 
-        <h2 id="introduction">1. Introduction &amp; Scope</h2>
+        <h2>1. Introduction &amp; Scope</h2>
         <p>
           This Privacy Policy applies to all visitors, registered clients, partners, and applicants who access the ORBIT-I website, client portal, API endpoints, or communications infrastructure. By interacting with our platforms, you acknowledge and agree to the information practices described in this policy.
         </p>
 
-        <h2 id="information-we-collect">2. Information We Collect</h2>
+        <h2>2. Information We Collect</h2>
         <p>
           We collect only information reasonably necessary to conduct business, fulfill engineering milestones, process payments, and support clients. Information is gathered through direct submissions, automated platform logging, and authorized third-party service providers.
         </p>
 
-        <h2 id="categories-of-personal-information">3. Categories of Personal Information</h2>
+        <h2>3. Categories of Personal Information</h2>
         <ul>
           <li><strong>Identity and Contact:</strong> Full legal name, official email, phone number, organization name, billing address, and account credentials.</li>
           <li><strong>Account &amp; Project Operations:</strong> Cryptographically hashed credentials, order records, architectural specifications, project milestones, support tickets, and direct messages.</li>
@@ -38,18 +35,12 @@ export function PrivacyPolicyPage() {
           <li><strong>Recruitment &amp; Traineeship Data:</strong> Resumes, portfolios, academic credentials, GitHub/LinkedIn references, and interview evaluations.</li>
         </ul>
 
-        <h2 id="payment-safety-warning">4. Payment Safety &amp; Anti-Fraud Warning</h2>
-        <div className="my-5 rounded-xl border border-amber-200 bg-amber-50/70 p-5 text-amber-950">
-          <div className="flex gap-3">
-            <AlertTriangle className="size-5 shrink-0 text-amber-600 mt-0.5" aria-hidden />
-            <div className="text-sm leading-relaxed">
-              <strong className="font-semibold text-amber-900 block mb-1">Critical Payment Security Notice:</strong>
-              Never send credit/debit card numbers, CVV codes, online-banking passwords, OTP codes, or cryptocurrency private keys to ORBIT-I through email, WhatsApp, or contact forms. All payments must strictly be executed through our official portal checkout or verifiable invoices with designated corporate bank accounts.
-            </div>
-          </div>
-        </div>
+        <h2>4. Payment Safety &amp; Anti-Fraud Guidelines</h2>
+        <p>
+          <strong>Critical Payment Security Notice:</strong> Never send credit or debit card numbers, CVV codes, online-banking passwords, OTP codes, or cryptocurrency private keys to ORBIT-I through email, WhatsApp, or contact forms. All payments must strictly be executed through our official portal checkout or verifiable invoices with designated corporate bank accounts.
+        </p>
 
-        <h2 id="how-we-use-information">5. How We Use Information</h2>
+        <h2>5. How We Use Information</h2>
         <p>
           We utilize collected information solely to provide, maintain, and protect our engineering solutions:
         </p>
@@ -60,43 +51,39 @@ export function PrivacyPolicyPage() {
           <li>Preventing distributed denial-of-service (DDoS) attacks, brute-force incursions, and fraudulent access.</li>
           <li>Meeting corporate reporting requirements under SECP and FBR statutory obligations.</li>
         </ul>
-        <p><strong>ORBIT-I does not monetize, sell, or rent your personal information to data brokers or third-party advertisers.</strong></p>
+        <p>
+          <strong>ORBIT-I does not monetize, sell, or rent your personal information to data brokers or third-party advertisers.</strong>
+        </p>
 
-        <h2 id="cookies-and-tracking">6. Cookies &amp; Local Storage</h2>
+        <h2>6. Cookies &amp; Local Storage</h2>
         <p>
           Our platform uses session cookies and secure local storage strictly for essential operations: preserving authentication sessions, remembering interface preferences, and telemetry security. You can adjust your browser settings to restrict cookies, although certain authenticated client features may become unavailable.
         </p>
 
-        <h2 id="data-storage-and-security">7. Data Storage &amp; Cryptographic Security</h2>
+        <h2>7. Data Storage &amp; Cryptographic Security</h2>
         <p>
           We apply enterprise-grade technical safeguards including TLS 1.3 encryption in transit, Argon2/bcrypt password hashing, least-privilege role-based access control (RBAC), and automated database backups. While no transmission method across the internet is infallible, we continuously monitor and patch vulnerabilities.
         </p>
 
-        <h2 id="third-party-services">8. Third-Party Service Providers</h2>
+        <h2>8. Third-Party Service Providers</h2>
         <p>
           We collaborate with vetted enterprise infrastructure providers (such as cloud hosting, transactional mail systems, and financial payment gateways) under strict confidentiality and data protection agreements.
         </p>
 
-        <h2 id="user-rights">9. User Rights &amp; Data Control</h2>
+        <h2>9. User Rights &amp; Data Control</h2>
         <p>
           You retain full rights to request an export of your personal data, seek rectification of erroneous information, or request account closure, subject to retention requirements imposed by tax and corporate regulations.
         </p>
 
-        <h2 id="business-registration">10. Corporate &amp; Legal Registration</h2>
-        <div className="my-5 rounded-xl border border-blue-200 bg-blue-50/70 p-5 text-slate-800">
-          <div className="flex gap-3">
-            <Building2 className="size-5 shrink-0 text-blue-700 mt-0.5" aria-hidden />
-            <div className="text-sm leading-relaxed">
-              <strong className="font-semibold text-slate-900 block mb-1">Corporate Authority &amp; Registration:</strong>
-              ORBIT-I Private Limited is an incorporated entity under the Companies Act with the <strong>Securities and Exchange Commission of Pakistan (SECP)</strong>, fully registered with the <strong>Federal Board of Revenue (FBR)</strong> and affiliated with the <strong>Pakistan Software Export Board (PSEB)</strong>.
-            </div>
-          </div>
-        </div>
+        <h2>10. Corporate &amp; Legal Registration</h2>
+        <p>
+          ORBIT-I Private Limited is an incorporated entity under the Companies Act with the <strong>Securities and Exchange Commission of Pakistan (SECP)</strong>, fully registered with the <strong>Federal Board of Revenue (FBR)</strong> and affiliated with the <strong>Pakistan Software Export Board (PSEB)</strong>.
+        </p>
 
-        <h2 id="contact-information">11. Privacy Contact &amp; Grievances</h2>
+        <h2>11. Privacy Contact &amp; Grievances</h2>
         <p>
           For privacy inquiries, data rectification, or compliance questions, please contact our Data Protection Officer at{' '}
-          <a href={`mailto:${CONTACT_EMAIL}`} className="text-blue-600 hover:text-blue-700 font-medium">
+          <a href={`mailto:${CONTACT_EMAIL}`}>
             {CONTACT_EMAIL}
           </a>
           .
@@ -105,4 +92,3 @@ export function PrivacyPolicyPage() {
     </>
   )
 }
-
