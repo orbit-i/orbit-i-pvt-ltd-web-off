@@ -4,6 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const path_1 = __importDefault(require("path"));
+const fs_1 = __importDefault(require("fs"));
 const cors_1 = __importDefault(require("cors"));
 const helmet_1 = __importDefault(require("helmet"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
@@ -49,6 +51,29 @@ if (!env_1.env.isProduction) {
 }
 // --- Routes -----------------------------------------------------------------------
 app.use('/api/v1', index_1.default);
+// --- Serve static frontend if available (full-stack deployment) -------------------
+const clientDistCandidates = [
+    path_1.default.resolve(__dirname, '../../client/dist'),
+    path_1.default.resolve(__dirname, '../client/dist'),
+    path_1.default.resolve(process.cwd(), 'client/dist'),
+    path_1.default.resolve(process.cwd(), '../client/dist'),
+];
+let clientDistPath = null;
+for (const candidate of clientDistCandidates) {
+    if (fs_1.default.existsSync(path_1.default.join(candidate, 'index.html'))) {
+        clientDistPath = candidate;
+        break;
+    }
+}
+if (clientDistPath) {
+    app.use(express_1.default.static(clientDistPath));
+    app.get('*', (req, res, next) => {
+        if (req.path.startsWith('/api')) {
+            return next();
+        }
+        res.sendFile(path_1.default.join(clientDistPath, 'index.html'));
+    });
+}
 // --- 404 + error handling ----------------------------------------------------------
 app.use(validate_1.notFoundHandler);
 app.use(errorHandler_1.errorHandler);

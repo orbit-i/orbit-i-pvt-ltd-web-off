@@ -1,4 +1,6 @@
 import express from 'express'
+import path from 'path'
+import fs from 'fs'
 import cors from 'cors'
 import helmet from 'helmet'
 import cookieParser from 'cookie-parser'
@@ -52,6 +54,32 @@ if (!env.isProduction) {
 
 // --- Routes -----------------------------------------------------------------------
 app.use('/api/v1', apiRouter)
+
+// --- Serve static frontend if available (full-stack deployment) -------------------
+const clientDistCandidates = [
+  path.resolve(__dirname, '../../client/dist'),
+  path.resolve(__dirname, '../client/dist'),
+  path.resolve(process.cwd(), 'client/dist'),
+  path.resolve(process.cwd(), '../client/dist'),
+]
+
+let clientDistPath: string | null = null
+for (const candidate of clientDistCandidates) {
+  if (fs.existsSync(path.join(candidate, 'index.html'))) {
+    clientDistPath = candidate
+    break
+  }
+}
+
+if (clientDistPath) {
+  app.use(express.static(clientDistPath))
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api')) {
+      return next()
+    }
+    res.sendFile(path.join(clientDistPath!, 'index.html'))
+  })
+}
 
 // --- 404 + error handling ----------------------------------------------------------
 app.use(notFoundHandler)

@@ -40,7 +40,11 @@ export function LoginPage() {
       navigate(redirectTo, { replace: true })
     } catch (err) {
       const message = axios.isAxiosError(err) ? err.response?.data?.message : null
-      setFormError(message || 'Invalid email or password.')
+      if (!message || message.toLowerCase().includes('refresh') || message.toLowerCase().includes('token')) {
+        setFormError('Invalid email or password. Please verify your credentials and try again.')
+      } else {
+        setFormError(message)
+      }
     }
   }
 

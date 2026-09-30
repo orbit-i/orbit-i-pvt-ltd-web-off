@@ -57,7 +57,11 @@ export function AdminLoginPage() {
       navigate(redirectTo, { replace: true })
     } catch (err) {
       const message = axios.isAxiosError(err) ? err.response?.data?.message : null
-      setFormError(message || 'Access Denied: Invalid administrative credentials or account locked.')
+      if (!message || message.toLowerCase().includes('refresh') || message.toLowerCase().includes('token')) {
+        setFormError('Access Denied: Invalid administrative credentials. Please verify your email and password.')
+      } else {
+        setFormError(message)
+      }
     }
   }
 

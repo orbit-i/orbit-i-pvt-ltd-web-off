@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin/
+Disallow: /client/
+Disallow: /dashboard/
+Disallow: /profile/
+Disallow: /checkout/
+Disallow: /api/
+Disallow: /login
+Disallow: /register
+Disallow: /forgot-password
+Disallow: /reset-password
+
+Sitemap: https://orbit-i.com/sitemap.xml
